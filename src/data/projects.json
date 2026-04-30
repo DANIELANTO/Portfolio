@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "id": "01",
+      "title": "NodePay",
+      "category": "Fintech",
+      "description": "Real-time payment platform with microservices, AI-powered queries, and centralized authentication.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "challenge": "Manage financial transactions in real-time with high concurrency and avoid inconsistencies.",
+      "solution": "Microservices architecture with WebSockets, DDD, and strict control of business rules, ensuring consistency and low latency.",
+      "images": [
+        "/assets/NodePayDiagram.jpg"
+      ],
+      "githubUrl": "https://github.com/DANIELANTO/nodepay-core",
+      "stack": [
+        "React",
+        "Node.js",
+        "FastAPI",
+        "PostgreSQL",
+        "Redis",
+        "Docker",
+        "Keycloak"
+      ],
+      "engineering": {
+        "architectureExplanation": "A decoupled microservices architecture was designed, separating the user domain, AI, and frontend. Hybrid communication (REST + WebSockets) was implemented to optimize synchronous operations and real-time events. Keycloak was integrated for centralized authentication, along with an AI service using RAG + SQL Agent for intelligent queries over data and documents.",
+        "diagramUrl": "/assets/NodePayDiagram.jpg",
+        "technicalKeyPoints": [
+          "Decoupled microservices",
+          "WebSockets with rooms for real-time",
+          "RAG + SQL Agent for contextual AI",
+          "DDD + Repository Pattern",
+          "Centralized authentication with Keycloak"
+        ]
+      }
+    },
+    {
+      "id": "02",
+      "title": "Subtitler",
+      "category": "AI / Media",
+      "description": "AI-driven subtitle generator that processes video asynchronously with real-time progress feedback.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "challenge": "Process heavy videos without blocking the system while maintaining real-time feedback for the user.",
+      "solution": "Asynchronous pipeline with Celery + Redis, distributed processing, and event streaming with SSE.",
+      "images": [
+        "/assets/SubtitlerDiagram.jpg"
+      ],
+      "githubUrl": "https://github.com/DANIELANTO/ai-video-processor",
+      "stack": [
+        "React",
+        "FastAPI",
+        "PostgreSQL",
+        "Redis",
+        "Celery",
+        "FFmpeg",
+        "Azure Blob Storage"
+      ],
+      "engineering": {
+        "architectureExplanation": "Clean Architecture with DDD was implemented, separating domain, application, and infrastructure. Video processing is completely decoupled via workers (Celery), while Redis acts as a broker and real-time event channel (SSE). Direct uploads to Azure eliminate backend bottlenecks.",
+        "diagramUrl": "/assets/SubtitlerDiagram.jpg",
+        "technicalKeyPoints": [
+          "Clean Architecture + DDD",
+          "Asynchronous processing with Celery",
+          "Real-time streaming with SSE",
+          "Direct cloud upload (Azure SAS)",
+          "AI integration with Whisper"
+        ]
+      }
+    }
+  ]
+}
