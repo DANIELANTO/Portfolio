@@ -4,10 +4,7 @@
       "id": "01",
       "title": "NodePay",
       "category": "Fintech",
-      "description": "Real-time payment platform with microservices, AI-powered queries, and centralized authentication.",
       "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
-      "challenge": "Manage financial transactions in real-time with high concurrency and avoid inconsistencies.",
-      "solution": "Microservices architecture with WebSockets, DDD, and strict control of business rules, ensuring consistency and low latency.",
       "images": [
         "/assets/NodePayDiagram.jpg"
       ],
@@ -22,25 +19,36 @@
         "Keycloak"
       ],
       "engineering": {
-        "architectureExplanation": "A decoupled microservices architecture was designed, separating the user domain, AI, and frontend. Hybrid communication (REST + WebSockets) was implemented to optimize synchronous operations and real-time events. Keycloak was integrated for centralized authentication, along with an AI service using RAG + SQL Agent for intelligent queries over data and documents.",
         "diagramUrl": "/assets/NodePayDiagram.jpg",
-        "technicalKeyPoints": [
+        "architectureExplanation_en": "A decoupled microservices architecture was designed, separating the user domain, AI, and frontend. Hybrid communication (REST + WebSockets) was implemented to optimize synchronous operations and real-time events. Keycloak was integrated for centralized authentication, along with an AI service using RAG + SQL Agent for intelligent queries over data and documents.",
+        "architectureExplanation_es": "Se diseñó una arquitectura de microservicios desacoplada, separando el dominio de usuario, IA y frontend. Se implementó comunicación híbrida (REST + WebSockets) para optimizar operaciones síncronas y eventos en tiempo real. Se integró Keycloak para autenticación centralizada, junto con un servicio de IA usando RAG + SQL Agent para consultas inteligentes sobre datos y documentos.",
+        "technicalKeyPoints_en": [
           "Decoupled microservices",
           "WebSockets with rooms for real-time",
           "RAG + SQL Agent for contextual AI",
           "DDD + Repository Pattern",
           "Centralized authentication with Keycloak"
+        ],
+        "technicalKeyPoints_es": [
+          "Microservicios desacoplados",
+          "WebSockets con salas para tiempo real",
+          "RAG + SQL Agent para IA contextual",
+          "DDD + Patrón de Repositorio",
+          "Autenticación centralizada con Keycloak"
         ]
-      }
+      },
+      "description_en": "Real-time payment platform with microservices, AI-powered queries, and centralized authentication.",
+      "description_es": "Plataforma de pagos en tiempo real con microservicios, consultas potenciadas por IA y autenticación centralizada.",
+      "challenge_en": "Manage financial transactions in real-time with high concurrency and avoid inconsistencies.",
+      "challenge_es": "Gestionar transacciones financieras en tiempo real con alta concurrencia y evitar inconsistencias.",
+      "solution_en": "Microservices architecture with WebSockets, DDD, and strict control of business rules, ensuring consistency and low latency.",
+      "solution_es": "Arquitectura de microservicios con WebSockets, DDD y estricto control de reglas de negocio, asegurando consistencia y baja latencia."
     },
     {
       "id": "02",
       "title": "Subtitler",
       "category": "AI / Media",
-      "description": "AI-driven subtitle generator that processes video asynchronously with real-time progress feedback.",
       "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
-      "challenge": "Process heavy videos without blocking the system while maintaining real-time feedback for the user.",
-      "solution": "Asynchronous pipeline with Celery + Redis, distributed processing, and event streaming with SSE.",
       "images": [
         "/assets/SubtitlerDiagram.jpg"
       ],
@@ -55,16 +63,30 @@
         "Azure Blob Storage"
       ],
       "engineering": {
-        "architectureExplanation": "Clean Architecture with DDD was implemented, separating domain, application, and infrastructure. Video processing is completely decoupled via workers (Celery), while Redis acts as a broker and real-time event channel (SSE). Direct uploads to Azure eliminate backend bottlenecks.",
         "diagramUrl": "/assets/SubtitlerDiagram.jpg",
-        "technicalKeyPoints": [
+        "architectureExplanation_en": "Clean Architecture with DDD was implemented, separating domain, application, and infrastructure. Video processing is completely decoupled via workers (Celery), while Redis acts as a broker and real-time event channel (SSE). Direct uploads to Azure eliminate backend bottlenecks.",
+        "architectureExplanation_es": "Se implementó Clean Architecture con DDD, separando dominio, aplicación e infraestructura. El procesamiento de video está completamente desacoplado a través de workers (Celery), mientras que Redis actúa como broker y canal de eventos en tiempo real (SSE). Las subidas directas a Azure eliminan los cuellos de botella del backend.",
+        "technicalKeyPoints_en": [
           "Clean Architecture + DDD",
           "Asynchronous processing with Celery",
           "Real-time streaming with SSE",
           "Direct cloud upload (Azure SAS)",
           "AI integration with Whisper"
+        ],
+        "technicalKeyPoints_es": [
+          "Clean Architecture + DDD",
+          "Procesamiento asíncrono con Celery",
+          "Transmisión en tiempo real con SSE",
+          "Subida directa a la nube (Azure SAS)",
+          "Integración de IA con Whisper"
         ]
-      }
+      },
+      "description_en": "AI-driven subtitle generator that processes video asynchronously with real-time progress feedback.",
+      "description_es": "Generador de subtítulos impulsado por IA que procesa videos de forma asíncrona con retroalimentación de progreso en tiempo real.",
+      "challenge_en": "Process heavy videos without blocking the system while maintaining real-time feedback for the user.",
+      "challenge_es": "Procesar videos pesados sin bloquear el sistema mientras se mantiene retroalimentación en tiempo real para el usuario.",
+      "solution_en": "Asynchronous pipeline with Celery + Redis, distributed processing, and event streaming with SSE.",
+      "solution_es": "Canal asíncrono con Celery + Redis, procesamiento distribuido y transmisión de eventos con SSE."
     }
   ]
 }

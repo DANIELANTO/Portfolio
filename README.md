@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-end personal portfolio built with React, Vite, TypeScript, and Tailwind CSS. The project is designed to showcase complex engineering projects through an interactive and highly polished user interface.
 
-Currently, two official plugins are available:
+## 🏗️ Architecture & Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Core Technologies
+- **Framework**: React 19 + TypeScript
+- **Build Tool**: Vite (for fast HMR and optimized builds)
+- **Styling**: Tailwind CSS v4, custom utility classes, and custom CSS for specific UI effects.
+- **Animations**: Framer Motion for scroll-triggered and interactive UI animations.
+- **Icons**: Lucide React.
 
-## React Compiler
+### Project Structure
+The repository follows a clean, component-based architecture with a clear separation of concerns between UI components, layout sections, and data.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+├── assets/         # Static assets (images, videos, diagrams)
+├── components/
+│   ├── sections/   # Major page blocks
+│   │   ├── Hero.tsx
+│   │   ├── ProjectsGallery.tsx
+│   │   ├── TechStack.tsx
+│   │   ├── Footer.tsx
+│   │   └── projects/ # Complex subcomponents for the gallery
+│   │       ├── ProjectCard.tsx
+│   │       ├── ProjectModal.tsx
+│   │       ├── DiagramViewer.tsx
+│   │       └── ImageCarousel.tsx
+│   └── ui/         # Reusable atomic UI elements (Button, Badge, etc.)
+├── data/           # Static content and type definitions
+│   ├── projects.json
+│   └── types.ts
+├── App.tsx         # Main application orchestrator
+├── index.css       # Global styles and Tailwind configuration
+└── main.tsx        # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Component Breakdown
+1. **Hero**: The landing section featuring a dynamic introduction and a text rotator component.
+2. **ProjectsGallery**: The core feature of the portfolio. It dynamically loads projects from `projects.json`. It utilizes several complex subcomponents:
+   - **ProjectCard**: A summarized preview of a project.
+   - **ProjectModal**: A detailed deep-dive overlay displaying the challenge, solution, and engineering specifics.
+   - **DiagramViewer**: An interactive architectural diagram viewer with zooming and panning capabilities.
+   - **ImageCarousel**: For navigating through project media and screenshots.
+3. **TechStack**: A stylized list of mastered technologies categorized by domain (Frontend, Backend, DevOps, etc.), leveraging scroll-triggered Framer Motion animations.
+4. **Footer**: A sophisticated closing section incorporating contact capabilities and external links.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Data Management
+Content is strictly separated from presentation. All project details are stored in `src/data/projects.json` and typed using TypeScript interfaces defined in `src/data/types.ts`. This configuration allows easy updates to the portfolio content without modifying React component logic.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm, yarn, or pnpm
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Portfolio
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+To start the development server with Hot Module Replacement (HMR):
+```bash
+npm run dev
 ```
+
+### Building for Production
+To build the application for deployment:
+```bash
+npm run build
+```
+This command runs the TypeScript compiler and bundles the app using Vite. To preview the production build locally:
+```bash
+npm run preview
+```
+
+## 🎨 Design Philosophy
+- **Aesthetics**: Focused on a premium, cohesive design with high-contrast text, subtle borders, and smooth interactive elements.
+- **Responsiveness**: Mobile-first approach ensuring proper display across all device viewports.
+- **Interactivity**: Fluid micro-animations (hover states, modal transitions, architecture diagram panning) powered by Framer Motion to enhance user engagement.

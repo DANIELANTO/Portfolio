@@ -1,0 +1,14 @@
+{
+  "title1": "Technical ",
+  "title2": "Expertise",
+  "description": "Mastered tools for building robust solutions.",
+  "categories": {
+    "Frontend": "Frontend",
+    "Backend": "Backend",
+    "Language": "Language",
+    "Styling": "Styling",
+    "Database": "Database",
+    "Cloud": "Cloud",
+    "DevOps": "DevOps"
+  }
+}

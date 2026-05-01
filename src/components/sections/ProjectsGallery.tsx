@@ -1,5 +1,6 @@
 import React, { use, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { fetchProjects } from '../../hooks/useProjects';
 import type { Project } from '../../data/types';
 import { ProjectCard } from './projects/ProjectCard';
@@ -52,6 +53,7 @@ const CardSkeleton: React.FC = () => (
 );
 
 export const ProjectsGallery: React.FC = () => {
+  const { t } = useTranslation(['projects']);
   return (
     <section id="projects" className="py-24 bg-background border-b-8 border-foreground">
       <div className="max-w-7xl mx-auto px-6">
@@ -59,11 +61,11 @@ export const ProjectsGallery: React.FC = () => {
         {/* Section header */}
         <div className="mb-12">
           <h2 className="text-5xl font-extrabold text-foreground uppercase tracking-tight mb-4">
-            Projects &amp; <span className="text-primary">Demos</span>
+            {t('title1')}<span className="text-primary">{t('title2')}</span>
           </h2>
           <div className="w-16 h-1.5 bg-accent mb-5 rounded-full" />
           <p className="text-base text-foreground/60 font-medium max-w-xl leading-relaxed">
-            High-impact projects built with a focus on conversion, performance, and scalable architecture.
+            {t('description')}
           </p>
         </div>
 

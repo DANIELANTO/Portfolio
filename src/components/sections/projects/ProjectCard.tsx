@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import type { Project } from '../../../data/types';
 import { ArrowUpRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { ImageCarousel } from './ImageCarousel';
 
 interface ProjectCardProps {
@@ -19,8 +20,11 @@ const TechPill: React.FC<{ label: string }> = ({ label }) => (
 );
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClick }) => {
+  const { t, i18n } = useTranslation(['common']);
   const visibleStack = project.stack.slice(0, 4);
   const hiddenCount = project.stack.length - visibleStack.length;
+
+  const description = i18n.language.startsWith('es') ? project.description_es : project.description_en;
 
   return (
     <motion.article
@@ -59,7 +63,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
 
         {/* Short description */}
         <p className="text-sm text-foreground/55 leading-relaxed line-clamp-2">
-          {project.description}
+          {description}
         </p>
 
         {/* Tech stack pills */}
@@ -98,7 +102,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
                          transition-transform duration-500 ease-in-out
                          group-hover/btn:translate-x-full"
             />
-            <span className="relative">View Details</span>
+            <span className="relative">{t('viewDetails')}</span>
             <ArrowUpRight
               className="relative w-4 h-4 transition-transform duration-300
                          group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"

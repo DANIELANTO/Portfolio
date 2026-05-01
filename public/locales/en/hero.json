@@ -1,0 +1,26 @@
+{
+  "seniorDev": "Senior Fullstack Developer",
+  "titleP1": "I transform ",
+  "titleP2": " processes into ",
+  "titleP3": "systems with efficiency and ",
+  "wordA": [
+    "complex",
+    "tedious",
+    "difficult",
+    "large",
+    "repetitive"
+  ],
+  "wordB": [
+    "clarity",
+    "precision",
+    "lucidity"
+  ],
+  "description": "Specialist in scalable architectures and user experiences. Passionate about building robust, efficient, and business-focused software.",
+  "viewProjects": "View Projects",
+  "contactMe": "Contact Me",
+  "contact": "Contact",
+  "mail": "Mail",
+  "phone": "Phone",
+  "languages": "Languages",
+  "location": "Location"
+}

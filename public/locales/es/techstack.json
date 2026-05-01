@@ -1,0 +1,14 @@
+{
+  "title1": "Experiencia ",
+  "title2": "Técnica",
+  "description": "Herramientas dominadas para construir soluciones robustas.",
+  "categories": {
+    "Frontend": "Frontend",
+    "Backend": "Backend",
+    "Language": "Lenguaje",
+    "Styling": "Estilos",
+    "Database": "Base de Datos",
+    "Cloud": "Nube",
+    "DevOps": "DevOps"
+  }
+}

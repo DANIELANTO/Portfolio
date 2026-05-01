@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, GitBranch, Code2, Layers, Zap, CheckCircle } from 'lucide-react';
 import type { Project } from '../../../data/types';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../ui/Button';
 import { DiagramViewer } from './DiagramViewer';
 
@@ -19,6 +20,7 @@ const StackPill: React.FC<{ label: string }> = ({ label }) => (
 );
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const { t, i18n } = useTranslation(['common']);
   // Close on Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -111,11 +113,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <Zap className="w-3.5 h-3.5 text-accent" />
                 </span>
                 <h3 className="text-xs font-bold text-foreground/50 uppercase tracking-[0.15em]">
-                  The Challenge
+                  {t('theChallenge')}
                 </h3>
               </div>
               <p className="text-sm text-foreground/75 leading-relaxed">
-                {project.challenge}
+                {i18n.language.startsWith('es') ? project.challenge_es : project.challenge_en}
               </p>
             </div>
 
@@ -130,11 +132,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   <CheckCircle className="w-3.5 h-3.5 text-primary" />
                 </span>
                 <h3 className="text-xs font-bold text-foreground/50 uppercase tracking-[0.15em]">
-                  The Solution
+                  {t('theSolution')}
                 </h3>
               </div>
               <p className="text-sm text-foreground/75 leading-relaxed">
-                {project.solution}
+                {i18n.language.startsWith('es') ? project.solution_es : project.solution_en}
               </p>
             </div>
           </div>
@@ -143,7 +145,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <div>
             <div className="flex items-center gap-2 mb-3">
               <Code2 className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">Stack</h3>
+              <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">{t('stack')}</h3>
             </div>
             <div className="flex flex-wrap gap-2">
               {project.stack.map((tech) => (
@@ -157,7 +159,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <div className="flex items-center gap-3 px-6 py-4 border-b border-white/10">
               <Layers className="w-5 h-5 text-accent flex-shrink-0" />
               <h3 className="text-base font-bold uppercase tracking-wide text-white">
-                Engineering & Architecture
+                {t('engineering')}
               </h3>
             </div>
 
@@ -165,15 +167,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               {/* Left — explanation + key points */}
               <div className="p-6 flex flex-col gap-5">
                 <p className="text-sm text-gray-300 leading-relaxed">
-                  {project.engineering.architectureExplanation}
+                  {i18n.language.startsWith('es') ? project.engineering.architectureExplanation_es : project.engineering.architectureExplanation_en}
                 </p>
 
                 <div>
                   <h4 className="text-xs font-bold text-accent uppercase tracking-widest mb-3">
-                    Key Points
+                    {t('keyPoints')}
                   </h4>
                   <ul className="space-y-2">
-                    {project.engineering.technicalKeyPoints.map((point, i) => (
+                    {(i18n.language.startsWith('es') ? project.engineering.technicalKeyPoints_es : project.engineering.technicalKeyPoints_en).map((point, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-gray-200">
                         <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-accent" />
                         {point}
@@ -186,7 +188,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               {/* Right — diagram */}
               <div className="p-6 flex flex-col gap-3">
                 <h4 className="text-xs font-bold text-accent uppercase tracking-widest">
-                  Architecture Diagram
+                  {t('architectureDiagram')}
                 </h4>
                 <div className="rounded-md overflow-hidden border border-white/15 bg-white/5">
                   <DiagramViewer diagramUrl={project.engineering.diagramUrl} />
@@ -203,14 +205,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               onClick={() => window.open(project.githubUrl, '_blank', 'noopener,noreferrer')}
             >
               <GitBranch className="w-4 h-4" />
-              Source Code
+              {t('sourceCode')}
             </Button>
             <Button
               variant="primary"
               className="px-6 text-sm"
               onClick={onClose}
             >
-              Close Details
+              {t('closeDetails')}
             </Button>
           </div>
         </div>

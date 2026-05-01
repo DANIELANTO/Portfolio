@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { X, ZoomIn } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface DiagramViewerProps {
   diagramUrl: string;
 }
 
 export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
+  const { t } = useTranslation(['common']);
   const [isOpen, setIsOpen] = useState(false);
   const [scale, setScale] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -100,7 +102,7 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
         <div className="w-full bg-gray-50 flex items-center justify-center" style={{ minHeight: '160px', maxHeight: '220px' }}>
           <img
             src={diagramUrl}
-            alt="Architecture Diagram Thumbnail"
+            alt={t('architectureDiagram')}
             className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
             style={{ maxHeight: '220px', display: 'block' }}
           />
@@ -116,7 +118,7 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
                            opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0
                            transition-all duration-300 shadow-lg">
             <ZoomIn className="w-4 h-4" />
-            View Diagram
+            {t('viewDiagram')}
           </span>
         </div>
       </button>
@@ -146,7 +148,7 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
               {/* Modal header */}
               <div className="flex items-center justify-between px-5 py-3 bg-gray-900 border-b border-white/10">
                 <h3 className="text-white font-bold tracking-wide text-sm uppercase">
-                  Architecture Diagram
+                  {t('architectureDiagram')}
                 </h3>
                 <button
                   type="button"
@@ -171,7 +173,7 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
                 <motion.img
                   ref={imgRef}
                   src={diagramUrl}
-                  alt="Architecture Diagram — Full View"
+                  alt={t('architectureDiagram')}
                   className={`w-full h-auto object-contain block ${scale > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
                   style={{ maxHeight: '100%', originX: 0.5, originY: 0.5 }}
                   animate={controls}

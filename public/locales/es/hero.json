@@ -1,0 +1,26 @@
+{
+  "seniorDev": "Desarrollador Fullstack Senior",
+  "titleP1": "Transformo procesos ",
+  "titleP2": " en ",
+  "titleP3": "sistemas con eficiencia y ",
+  "wordA": [
+    "complejos",
+    "tediosos",
+    "difíciles",
+    "extensos",
+    "repetitivos"
+  ],
+  "wordB": [
+    "claridad",
+    "precisión",
+    "lucidez"
+  ],
+  "description": "Especialista en arquitecturas escalables y experiencias de usuario. Apasionado por construir software robusto, eficiente y centrado en el negocio.",
+  "viewProjects": "Ver Proyectos",
+  "contactMe": "Contáctame",
+  "contact": "Contacto",
+  "mail": "Correo",
+  "phone": "Teléfono",
+  "languages": "Idiomas",
+  "location": "Ubicación"
+}

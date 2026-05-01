@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/Button';
 import { ArrowRight, ExternalLink, GitBranch, Mail } from 'lucide-react';
 import { TextRotator } from '../ui/TextRotator';
 
 // ─── Contact overlay data ─────────────────────────────────────────────────────
 
-const CONTACT_INFO = {
-  bio: 'Result-driven Software Engineer building scalable solutions that enhance user experience and streamline business operations, turning complex challenges into high-impact products.',
+const getContactInfo = (t: any) => ({
+  bio: t('description'),
   mail: 'danred001@gmail.com',
   phone: '+503 75392732',
-  languages: 'English, Spanish',
-  location: 'La Libertad, El Salvador, willing to relocate',
-};
+  languages: t('hero:languages', { defaultValue: 'English, Spanish' }), // Using fallback if needed, but we have it translated. Wait, we don't have the value "English, Spanish" in translation, we only have the label. I'll just hardcode the value or use a key if needed. The translation strings only have the labels.
+  // Actually, we can just return what's needed. Let's just pass `t` and build the object.
+  location: 'La Libertad, El Salvador',
+});
 
 const HERO_SOCIAL_LINKS = [
   {
@@ -27,7 +29,7 @@ const HERO_SOCIAL_LINKS = [
   },
   {
     label: 'Email',
-    href: `mailto:${CONTACT_INFO.mail}`,
+    href: `mailto:danred001@gmail.com`,
     icon: Mail,
   },
 ] as const;
@@ -35,10 +37,13 @@ const HERO_SOCIAL_LINKS = [
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export const Hero: React.FC = () => {
+  const { t } = useTranslation(['hero']);
   const [hovered, setHovered] = useState(false);
 
-  const wordA = ['complex', 'tedious', 'difficult', 'large', 'repetitive'];
-  const wordB = ['clarity', 'precision', 'lucidity'];
+  const contactInfo = getContactInfo(t);
+
+  const wordA = t('wordA', { returnObjects: true }) as string[];
+  const wordB = t('wordB', { returnObjects: true }) as string[];
 
   return (
     <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b-8 border-foreground">
@@ -56,29 +61,28 @@ export const Hero: React.FC = () => {
           className="flex flex-col items-start gap-6"
         >
           <div className="inline-block px-4 py-2 bg-primary text-white font-bold tracking-wider uppercase text-sm mb-2">
-            Senior Fullstack Developer
+            {t('seniorDev')}
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold text-foreground leading-[1.1] tracking-tight">
-            I transform <TextRotator words={wordA} className="text-primary px-1" /> processes into{' '}
+            {t('titleP1')}<TextRotator words={wordA} className="text-primary px-1" />{t('titleP2')}
             <span className="text-primary">
-              systems with efficiency and{' '}
+              {t('titleP3')}
               <TextRotator words={wordB} className="underline decoration-4 underline-offset-8" />.
             </span>
           </h1>
           <p className="text-xl text-foreground/80 font-medium max-w-xl leading-relaxed mt-4">
-            Specialist in scalable architectures and user experiences. Passionate about building
-            robust, efficient, and business-focused software.
+            {t('description')}
           </p>
 
           <div className="flex flex-wrap gap-4 mt-8">
             <a href="#projects">
               <Button variant="primary" className="flex items-center gap-2 group">
-                View Projects
+                {t('viewProjects')}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </a>
             <a href="#contact">
-              <Button variant="outline">Contact Me</Button>
+              <Button variant="outline">{t('contactMe')}</Button>
             </a>
           </div>
         </motion.div>
@@ -120,37 +124,37 @@ export const Hero: React.FC = () => {
                 >
                   {/* Title */}
                   <p className="text-accent text-xs font-bold uppercase tracking-widest mb-3">
-                    Contact
+                    {t('contact')}
                   </p>
 
                   {/* Bio */}
                   <p className="text-white/80 text-sm leading-relaxed mb-5">
-                    {CONTACT_INFO.bio}
+                    {contactInfo.bio}
                   </p>
 
                   {/* Contact details */}
                   <ul className="space-y-1.5 mb-6 text-sm">
                     <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">Mail</span>{' '}
+                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('mail')}</span>{' '}
                       <a
-                        href={`mailto:${CONTACT_INFO.mail}`}
+                        href={`mailto:${contactInfo.mail}`}
                         className="text-accent hover:underline ml-2"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        {CONTACT_INFO.mail}
+                        {contactInfo.mail}
                       </a>
                     </li>
                     <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">Phone</span>{' '}
-                      <span className="text-white ml-2">{CONTACT_INFO.phone}</span>
+                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('phone')}</span>{' '}
+                      <span className="text-white ml-2">{contactInfo.phone}</span>
                     </li>
                     <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">Languages</span>{' '}
-                      <span className="text-white ml-2">{CONTACT_INFO.languages}</span>
+                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('languages')}</span>{' '}
+                      <span className="text-white ml-2">English, Spanish</span>
                     </li>
                     <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">Location</span>{' '}
-                      <span className="text-white ml-2">{CONTACT_INFO.location}</span>
+                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('location')}</span>{' '}
+                      <span className="text-white ml-2">{contactInfo.location}</span>
                     </li>
                   </ul>
 

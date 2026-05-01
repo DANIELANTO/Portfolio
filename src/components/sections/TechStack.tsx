@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const technologies = [
   { name: 'React', category: 'Frontend', color: '#61DAFB' },
@@ -62,6 +63,7 @@ function TechPill({ tech }: { tech: (typeof technologies)[number] }) {
 }
 
 export const TechStack: React.FC = () => {
+  const { t } = useTranslation(['techstack']);
   return (
     <section className="py-24 bg-muted border-b border-foreground/10 overflow-hidden">
       <div className="max-w-4xl mx-auto px-6">
@@ -74,10 +76,10 @@ export const TechStack: React.FC = () => {
           viewport={{ once: false, amount: 0.3 }}
         >
           <h2 className="text-5xl font-bold text-foreground uppercase tracking-normal mb-3">
-            Technical <span className="text-secondary">Expertise</span>
+            {t('title1')} <span className="text-secondary">{t('title2')}</span>
           </h2>
           <p className="text-xl text-foreground/60 font-medium max-w-xl">
-            Mastered tools for building robust solutions.
+            {t('description')}
           </p>
         </motion.div>
 
@@ -99,7 +101,7 @@ export const TechStack: React.FC = () => {
               {/* Left: category label */}
               <div className="sm:w-28 shrink-0 mb-2 sm:mb-0 pt-1.5">
                 <span className="text-sm uppercase tracking-widest text-foreground/50 font-medium">
-                  {category}
+                  {t(`categories.${category}`, { defaultValue: category })}
                 </span>
               </div>
 
