@@ -1,19 +1,20 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  --color-background: #FAFAF8;
-  --color-foreground: #1A1A1A;
-  --color-primary: #B8860B;
-  --color-secondary: #F5F3F0;
-  --color-accent: #B8860B;
-  --color-muted: #F5F3F0;
-  --color-muted-foreground: #6B6B6B;
-  --color-border: #E8E4DF;
+  --color-background: #F7F3EF;
+  --color-background-secondary: #EAE0D4;
+  --color-foreground: #2B2A28;
+  --color-primary: #8B6E4D;
+  --color-secondary: #A68D68;
+  --color-accent: #CBBCAB;
+  --color-muted: #EAE0D4;
+  --color-border: #CBBCAB;
   --color-card: #FFFFFF;
   --font-serif: "Playfair Display", serif;
-  --font-sans: "Source Sans 3", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  --radius-card: 1.5rem;
+  --radius-image: 2rem;
 }
 
 @layer base {
@@ -36,6 +37,11 @@
 
 @layer components {
   .section-padding {
-    @apply py-32 md:py-44;
+    @apply py-32 md:py-40;
+  }
+  
+  .dot-pattern {
+    background-image: radial-gradient(var(--color-accent) 1px, transparent 1px);
+    background-size: 20px 24px;
   }
 }

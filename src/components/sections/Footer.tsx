@@ -50,44 +50,46 @@ export const Footer: React.FC = () => {
   const contactInfo = getContactInfo(t);
 
   return (
-    <footer id="contact" aria-label="Site footer" className="bg-background border-t border-border">
+    <footer id="contact" aria-label="Site footer" className="bg-background border-t border-accent/20">
 
       {/* ── Pre-footer CTA ───────────────────────────────────────────────── */}
-      <div className="section-padding border-b border-border relative overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-center">
+      <div className="section-padding border-b border-accent/20 relative overflow-hidden">
+        <div className="absolute inset-0 dot-pattern opacity-[0.2] pointer-events-none" />
+        
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-center relative z-10">
 
           {/* Left: Headline */}
           <div className="flex flex-col items-start gap-8">
             <div className="flex items-center gap-4">
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+              <span className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">
                 {t('openTo')}
               </span>
-              <span className="h-px w-12 bg-border" />
+              <span className="h-px w-12 bg-primary" />
             </div>
-            <h2 className="text-5xl md:text-7xl font-serif text-foreground leading-tight tracking-tight">
+            <h2 className="text-5xl md:text-7xl font-serif text-foreground leading-[1.1] tracking-tight">
               {t('readyToScale')}
               <br />
               <span className="italic text-primary">{t('nextSystem')}</span>
             </h2>
-            <p className="text-lg text-muted-foreground font-sans max-w-md leading-relaxed italic">
+            <p className="text-lg text-foreground/60 font-sans max-w-md leading-relaxed border-l-2 border-accent/30 pl-6">
               {t('description')}
             </p>
           </div>
 
           {/* Right: CTA block */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-6 lg:items-end">
+          <div className="flex flex-col gap-6 lg:items-end w-full lg:w-auto">
             <a
               href={`mailto:${contactInfo.mail}`}
-              className="min-w-[240px]"
+              className="w-full lg:w-auto"
             >
-              <Button variant="primary" className="w-full text-xs font-mono uppercase tracking-[0.2em]">
+              <Button variant="primary" className="w-full text-sm uppercase tracking-widest px-10">
                 {t('startConversation')}
                 <ArrowUpRight className="w-5 h-5" />
               </Button>
             </a>
             <a
               href="#projects"
-              className="flex items-center justify-center gap-3 px-8 py-3 border border-border bg-white font-mono text-[10px] uppercase tracking-widest hover:border-primary hover:text-primary transition-all duration-300 min-h-[44px]"
+              className="flex items-center justify-center gap-3 px-10 py-4 border border-accent/30 bg-white/50 backdrop-blur-sm rounded-full font-sans text-[11px] font-bold uppercase tracking-widest text-foreground hover:bg-white transition-all duration-300 shadow-sm"
             >
               {t('viewProjects')}
             </a>
@@ -97,26 +99,26 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ── Details Block ─────────────────────────────────────────────────── */}
-      <div className="py-24 border-b border-border">
-        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20">
+      <div className="py-24 border-b border-accent/20">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20">
 
           {/* Contact Details */}
           <div className="flex flex-col gap-10">
-            <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{t('contact')}</h3>
+            <h3 className="font-sans text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">{t('contact')}</h3>
             <div className="flex flex-col gap-8">
-              <p className="text-xl font-serif text-muted-foreground leading-relaxed italic pr-12">
+              <p className="text-2xl font-serif text-foreground leading-relaxed italic pr-12">
                 "{contactInfo.bio}"
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
                 <div className="flex flex-col gap-2">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('mail')}</span>
-                  <a href={`mailto:${contactInfo.mail}`} className="text-sm font-sans font-medium hover:text-primary transition-colors">
+                  <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-bold">{t('mail')}</span>
+                  <a href={`mailto:${contactInfo.mail}`} className="text-base font-sans font-medium text-foreground hover:text-primary transition-colors">
                     {contactInfo.mail}
                   </a>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('location')}</span>
-                  <span className="text-sm font-sans font-medium">{contactInfo.location}</span>
+                  <span className="font-sans text-[10px] uppercase tracking-widest text-secondary font-bold">{t('location')}</span>
+                  <span className="text-base font-sans font-medium text-foreground">{contactInfo.location}</span>
                 </div>
               </div>
             </div>
@@ -124,7 +126,7 @@ export const Footer: React.FC = () => {
 
           {/* Social Links */}
           <div className="flex flex-col gap-10 lg:items-end">
-            <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{t('connect')}</h3>
+            <h3 className="font-sans text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">{t('connect')}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto">
               {ACTION_LINKS.map(({ label, href }) => (
                 <a
@@ -132,10 +134,10 @@ export const Footer: React.FC = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between gap-6 px-6 py-4 border border-border bg-white text-[10px] font-mono font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-all duration-300 min-h-[44px]"
+                  className="flex items-center justify-between gap-6 px-8 py-5 border border-accent/20 bg-background-secondary rounded-2xl text-[11px] font-sans font-bold uppercase tracking-widest text-foreground hover:border-primary/40 hover:bg-white hover:-translate-y-1 transition-all duration-300 shadow-sm"
                 >
                   {label}
-                  <ArrowUpRight className="w-3 h-3" />
+                  <ArrowUpRight className="w-4 h-4 opacity-50" />
                 </a>
               ))}
             </div>
@@ -144,13 +146,13 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* ── Brand Bar ────────────────────────────────────────────────────── */}
-      <div className="py-12">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+      <div className="py-12 bg-[#2B2A28] text-[#F7F3EF]">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex flex-col items-center md:items-start gap-2">
-            <span className="text-3xl font-serif italic text-foreground leading-none">
+            <span className="text-3xl font-serif italic leading-none">
               Daniel Romero
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/30">
+            <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#F7F3EF]/50 font-medium">
               © {year} // Senior Software Engineer
             </span>
           </div>
@@ -161,7 +163,7 @@ export const Footer: React.FC = () => {
                 <li key={labelKey}>
                   <a
                     href={href}
-                    className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors duration-300"
+                    className="font-sans text-[10px] uppercase font-bold tracking-widest text-[#F7F3EF]/70 hover:text-white transition-colors duration-300"
                   >
                     {t(`nav.${labelKey}`, { defaultValue: labelKey })}
                   </a>

@@ -46,75 +46,76 @@ export const Hero: React.FC = () => {
   const wordB = t('wordB', { returnObjects: true }) as string[];
 
   return (
-    <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b border-border">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: `radial-gradient(var(--color-primary) 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px' }} />
+    <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b border-background-secondary">
+      {/* Subtle Dot Pattern */}
+      <div className="absolute inset-0 dot-pattern opacity-[0.4] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center relative z-10 w-full py-32 md:py-44">
-        {/* Left Side: Editorial Copy */}
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-16 items-center relative z-10 w-full py-24 md:py-32">
+        {/* Left Side: Minimalist Copy */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="flex flex-col items-start text-center lg:text-left"
+          className="flex flex-col items-start"
         >
-          <div className="mb-8 flex items-center gap-4 w-full lg:w-auto">
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+          <div className="mb-8 flex items-center gap-3">
+            <span className="w-10 h-0.5 bg-primary" />
+            <span className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">
               {t('seniorDev')}
             </span>
-            <span className="h-px flex-1 lg:w-12 bg-border" />
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground leading-[1.1] tracking-tight mb-8">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground leading-[1.05] tracking-tight mb-10">
             {t('titleP1')} <br />
-            <span className="italic text-primary">
+            <span className="text-secondary italic">
               <TextRotator words={wordA} />
             </span> 
             <br />
             {t('titleP3')}
-            <TextRotator words={wordB} className="underline decoration-1 underline-offset-[12px] decoration-border" />
+            <TextRotator words={wordB} className="underline decoration-2 underline-offset-[16px] decoration-accent" />
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-lg leading-relaxed mb-12 mx-auto lg:mx-0">
+          <p className="text-lg md:text-xl text-foreground/70 font-sans max-w-xl leading-relaxed mb-12">
             {t('description')}
           </p>
 
-          <div className="flex flex-wrap justify-center lg:justify-start gap-8 mt-4 w-full lg:w-auto">
+          <div className="flex flex-wrap gap-8 items-center">
             <a href="#projects">
-              <Button variant="primary" className="min-w-[200px]">
+              <Button variant="primary" className="min-w-[220px]">
                 {t('viewProjects')}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-5 h-5" />
               </Button>
             </a>
-            <a href="#contact" className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-foreground hover:text-primary transition-colors py-3 px-2">
-              {t('contactMe')}
-              <ExternalLink className="w-3 h-3" />
+            <a href="#contact" className="group flex items-center gap-2 font-sans text-sm font-bold uppercase tracking-widest text-foreground hover:text-primary transition-all">
+              <span className="border-b-2 border-transparent group-hover:border-primary pb-1">
+                {t('contactMe')}
+              </span>
+              <ExternalLink className="w-4 h-4 opacity-40 group-hover:opacity-100" />
             </a>
           </div>
         </motion.div>
 
-        {/* Right Side: Refined Photo Frame */}
+        {/* Right Side: Pronounced Rounded Profile */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="relative hidden lg:block h-[600px] w-full"
+          className="relative hidden lg:block h-[620px] w-full"
         >
-          {/* Decorative Elements */}
-          <div className="absolute -top-4 -right-4 w-32 h-32 border-t border-r border-border" />
-          <div className="absolute -bottom-4 -left-4 w-32 h-32 border-b border-l border-border" />
+          {/* Accent Circles */}
+          <div className="absolute -top-12 -right-12 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
+          <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
           
           {/* Image Container */}
           <div
-            className="absolute inset-0 bg-card border border-border overflow-hidden shadow-sm group cursor-pointer"
+            className="absolute inset-0 bg-background-secondary rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group cursor-pointer"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
             <img
               src="/ProfilePhotoExtended.png"
               alt="Profile"
-              className={`w-full h-full object-cover transition-all duration-700 ease-out ${hovered ? 'scale-105 opacity-20' : 'scale-100 opacity-100'
+              className={`w-full h-full object-cover transition-all duration-1000 ease-out ${hovered ? 'scale-110 saturate-[0.8] brightness-[1.1]' : 'scale-100 saturate-100 brightness-100'
                 }`}
             />
 
@@ -123,30 +124,30 @@ export const Hero: React.FC = () => {
               {hovered && (
                 <motion.div
                   key="overlay"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.4 }}
-                  className="absolute inset-0 flex flex-col justify-center p-12 bg-white/50 backdrop-blur-sm"
+                  className="absolute inset-0 flex flex-col justify-end p-12 bg-gradient-to-t from-[#2B2A28]/90 via-[#2B2A28]/40 to-transparent backdrop-blur-[2px]"
                 >
-                  <p className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] mb-6">
+                  <p className="font-sans text-[11px] text-accent font-bold uppercase tracking-[0.3em] mb-6">
                     {t('contact')}
                   </p>
                   
-                  <h3 className="text-3xl font-serif text-foreground mb-6 leading-tight">
+                  <h3 className="text-4xl font-serif text-white mb-8 leading-tight">
                     {t('seniorDev')}
                   </h3>
 
-                  <ul className="space-y-4 mb-10 text-sm font-sans text-muted-foreground">
+                  <ul className="space-y-6 mb-12 text-sm font-sans text-white/80">
                     <li className="flex flex-col gap-1">
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('mail')}</span>
-                      <a href={`mailto:${contactInfo.mail}`} className="text-foreground hover:text-primary transition-colors">
+                      <span className="font-sans text-[10px] uppercase tracking-widest text-accent/60 font-bold">{t('mail')}</span>
+                      <a href={`mailto:${contactInfo.mail}`} className="text-lg text-white hover:text-accent transition-colors font-medium">
                         {contactInfo.mail}
                       </a>
                     </li>
                     <li className="flex flex-col gap-1">
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('location')}</span>
-                      <span className="text-foreground">{contactInfo.location}</span>
+                      <span className="font-sans text-[10px] uppercase tracking-widest text-accent/60 font-bold">{t('location')}</span>
+                      <span className="text-lg text-white font-medium">{contactInfo.location}</span>
                     </li>
                   </ul>
 
@@ -157,10 +158,10 @@ export const Hero: React.FC = () => {
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 border border-border bg-white text-foreground hover:border-primary hover:text-primary transition-all duration-300 rounded-none shadow-sm"
+                        className="p-4 bg-white/10 hover:bg-primary text-white transition-all duration-300 rounded-2xl border border-white/20 backdrop-blur-md"
                         aria-label={label}
                       >
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-5 h-5" />
                       </a>
                     ))}
                   </div>

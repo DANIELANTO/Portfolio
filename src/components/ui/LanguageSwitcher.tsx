@@ -12,7 +12,7 @@ export const LanguageSwitcher: React.FC = () => {
   return (
     <button
       onClick={toggleLanguage}
-      className="fixed top-8 right-8 z-50 flex items-center justify-center w-12 h-12 bg-white border border-border shadow-sm hover:border-primary hover:text-primary active:translate-y-0.5 transition-all duration-200 font-mono text-[10px] font-bold tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+      className="fixed top-8 right-8 z-50 flex items-center justify-center w-12 h-12 bg-white/90 backdrop-blur-sm border border-accent/20 rounded-full shadow-sm hover:border-primary hover:text-primary active:scale-95 transition-all duration-300 font-sans text-[11px] font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/50"
       aria-label="Toggle language"
     >
       {i18n.language.startsWith('es') ? 'ES' : 'EN'}

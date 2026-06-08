@@ -55,24 +55,26 @@ const CardSkeleton: React.FC = () => (
 export const ProjectsGallery: React.FC = () => {
   const { t } = useTranslation(['projects']);
   return (
-    <section id="projects" className="section-padding bg-background border-b border-border relative">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="projects" className="section-padding bg-background-secondary border-b border-accent/20 relative overflow-hidden">
+      {/* Subtle Dot Pattern */}
+      <div className="absolute inset-0 dot-pattern opacity-[0.2] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
 
         {/* Section header */}
-        <div className="mb-24 flex flex-col items-center text-center">
-          <div className="mb-6 flex items-center gap-4 w-full">
-            <span className="h-px flex-1 bg-border" />
-            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
-              {t('title1')}
-            </span>
-            <span className="h-px flex-1 bg-border" />
+        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <span className="w-12 h-0.5 bg-primary" />
+              <span className="font-sans text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">
+                {t('title1')}
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-foreground tracking-tight max-w-2xl leading-[1.1]">
+              {t('title2')}
+            </h2>
           </div>
-          
-          <h2 className="text-5xl md:text-6xl font-serif text-foreground tracking-tight mb-8">
-            {t('title2')}
-          </h2>
-          
-          <p className="text-lg text-muted-foreground font-sans max-w-xl leading-relaxed italic">
+          <p className="text-lg text-foreground/60 font-sans max-w-sm leading-relaxed border-l-2 border-accent/30 pl-8 pb-2">
             {t('description')}
           </p>
         </div>

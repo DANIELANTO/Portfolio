@@ -13,9 +13,7 @@ interface ProjectCardProps {
 }
 
 const TechPill: React.FC<{ label: string }> = ({ label }) => (
-  <span className="inline-flex items-center px-2 py-0.5 rounded-none text-[9px] font-mono font-medium uppercase tracking-[0.1em]
-                   bg-secondary text-muted-foreground border border-border
-                   whitespace-nowrap">
+  <span className="px-3 py-1 bg-background-secondary text-foreground text-[10px] font-sans font-bold uppercase tracking-wider rounded-lg border border-accent/20">
     {label}
   </span>
 );
@@ -29,40 +27,40 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: 'easeOut' }}
-      className="group flex flex-col bg-card border border-border
-                 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-none
-                 relative"
+      className="group flex flex-col bg-card border border-accent/20 hover:border-primary/40
+                 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 rounded-[2rem]
+                 relative overflow-hidden p-4"
     >
       {/* ── Image area ─────────────────────────────────────────── */}
-      <div className="relative w-full aspect-[16/10] overflow-hidden bg-muted rounded-none border-b border-border">
-        <div className="transition-all duration-700 ease-out group-hover:scale-105">
+      <div className="relative w-full aspect-[16/10] overflow-hidden bg-background-secondary rounded-[1.5rem] border border-accent/10">
+        <div className="transition-all duration-1000 ease-out group-hover:scale-110">
           <ImageCarousel images={project.images} altText={project.title} />
         </div>
 
         {/* Category badge — top-left overlay */}
         <span className="absolute top-4 left-4 z-10
-                         inline-flex items-center px-3 py-1.5
-                         bg-white text-primary
-                         text-[9px] font-mono font-black uppercase tracking-[0.2em] shadow-sm">
+                         inline-flex items-center px-4 py-2
+                         bg-white/90 backdrop-blur-md text-primary
+                         text-[10px] font-sans font-black uppercase tracking-[0.2em] rounded-full shadow-lg border border-accent/10">
           {project.category}
         </span>
       </div>
 
       {/* ── Body ───────────────────────────────────────────────── */}
-      <div className="flex flex-col flex-1 px-8 pt-8 pb-8 gap-6">
+      <div className="flex flex-col flex-1 px-4 pt-8 pb-4 gap-6">
 
         {/* Title */}
-        <h3 className="text-3xl font-serif text-foreground leading-tight tracking-tight
+        <h3 className="text-2xl font-bold font-sans text-foreground leading-tight tracking-tight
                        group-hover:text-primary transition-colors duration-300">
           {project.title}
         </h3>
 
         {/* Short description */}
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 font-sans">
+        <p className="text-base text-foreground/60 leading-relaxed line-clamp-3 font-sans font-medium">
           {description}
         </p>
 
@@ -73,7 +71,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
           ))}
           {hiddenCount > 0 && (
             <span
-              className="text-[9px] font-mono text-muted-foreground/50 uppercase tracking-widest pl-1"
+              className="text-[10px] font-sans font-bold text-secondary uppercase tracking-widest pl-2"
             >
               +{hiddenCount}
             </span>
@@ -81,14 +79,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
         </div>
 
         {/* CTA Button */}
-        <div className="mt-4 pt-6 border-t border-border">
+        <div className="mt-auto pt-6">
           <Button
             variant="primary"
             onClick={onClick}
-            className="w-full text-xs font-mono uppercase tracking-[0.2em]"
+            className="w-full text-sm font-sans font-bold uppercase tracking-[0.1em] rounded-2xl"
           >
             <span>{t('viewDetails')}</span>
-            <ArrowUpRight className="w-4 h-4" />
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>
