@@ -46,68 +46,75 @@ export const Hero: React.FC = () => {
   const wordB = t('wordB', { returnObjects: true }) as string[];
 
   return (
-    <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b-8 border-foreground">
-      {/* Decorative Geometric Shapes */}
-      <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[10%] left-[5%] w-64 h-64 bg-accent/10 rounded-none rotate-45 pointer-events-none" />
-      <div className="absolute top-20 left-1/2 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNlNWU3ZWIiLz48L3N2Zz4=')] opacity-30 pointer-events-none" />
+    <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b border-border">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: `radial-gradient(var(--color-primary) 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px' }} />
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full py-20">
-        {/* Left Side: Copy */}
+      <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center relative z-10 w-full py-32 md:py-44">
+        {/* Left Side: Editorial Copy */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="flex flex-col items-start gap-6"
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="flex flex-col items-start text-center lg:text-left"
         >
-          <div className="inline-block px-4 py-2 bg-primary text-white font-bold tracking-wider uppercase text-sm mb-2">
-            {t('seniorDev')}
-          </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-foreground leading-[1.1] tracking-tight">
-            {t('titleP1')}<TextRotator words={wordA} className="text-primary px-1" />{t('titleP2')}
-            <span className="text-primary">
-              {t('titleP3')}
-              <TextRotator words={wordB} className="underline decoration-4 underline-offset-8" />.
+          <div className="mb-8 flex items-center gap-4 w-full lg:w-auto">
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+              {t('seniorDev')}
             </span>
+            <span className="h-px flex-1 lg:w-12 bg-border" />
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground leading-[1.1] tracking-tight mb-8">
+            {t('titleP1')} <br />
+            <span className="italic text-primary">
+              <TextRotator words={wordA} />
+            </span> 
+            <br />
+            {t('titleP3')}
+            <TextRotator words={wordB} className="underline decoration-1 underline-offset-[12px] decoration-border" />
           </h1>
-          <p className="text-xl text-foreground/80 font-medium max-w-xl leading-relaxed mt-4">
+
+          <p className="text-lg md:text-xl text-muted-foreground font-sans max-w-lg leading-relaxed mb-12 mx-auto lg:mx-0">
             {t('description')}
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-8 mt-4 w-full lg:w-auto">
             <a href="#projects">
-              <Button variant="primary" className="flex items-center gap-2 group">
+              <Button variant="primary" className="min-w-[200px]">
                 {t('viewProjects')}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
-            <a href="#contact">
-              <Button variant="outline">{t('contactMe')}</Button>
+            <a href="#contact" className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-foreground hover:text-primary transition-colors py-3 px-2">
+              {t('contactMe')}
+              <ExternalLink className="w-3 h-3" />
             </a>
           </div>
         </motion.div>
 
-        {/* Right Side: Photo with hover overlay */}
+        {/* Right Side: Refined Photo Frame */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           className="relative hidden lg:block h-[600px] w-full"
         >
-          {/* Solid color block behind */}
-          <div className="absolute inset-0 bg-accent translate-x-6 translate-y-6 rounded-none" />
-
+          {/* Decorative Elements */}
+          <div className="absolute -top-4 -right-4 w-32 h-32 border-t border-r border-border" />
+          <div className="absolute -bottom-4 -left-4 w-32 h-32 border-b border-l border-border" />
+          
           {/* Image Container */}
           <div
-            className="absolute inset-0 overflow-hidden rounded-none border-4 border-foreground cursor-pointer group"
+            className="absolute inset-0 bg-card border border-border overflow-hidden shadow-sm group cursor-pointer"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            {/* Profile photo — always in colour */}
             <img
-              src="/ProfilePhotoExtended.jpg"
+              src="/ProfilePhotoExtended.png"
               alt="Profile"
-              className={`w-full h-full object-cover transition-all duration-500 ${hovered ? 'blur-sm scale-105' : 'blur-0 scale-100'
+              className={`w-full h-full object-cover transition-all duration-700 ease-out ${hovered ? 'scale-105 opacity-20' : 'scale-100 opacity-100'
                 }`}
             />
 
@@ -119,58 +126,41 @@ export const Hero: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute inset-0 flex flex-col justify-center px-8 py-8 bg-foreground/75 backdrop-blur-sm overflow-y-auto"
+                  transition={{ duration: 0.4 }}
+                  className="absolute inset-0 flex flex-col justify-center p-12 bg-white/50 backdrop-blur-sm"
                 >
-                  {/* Title */}
-                  <p className="text-accent text-xs font-bold uppercase tracking-widest mb-3">
+                  <p className="font-mono text-[10px] text-primary uppercase tracking-[0.3em] mb-6">
                     {t('contact')}
                   </p>
+                  
+                  <h3 className="text-3xl font-serif text-foreground mb-6 leading-tight">
+                    {t('seniorDev')}
+                  </h3>
 
-                  {/* Bio */}
-                  <p className="text-white/80 text-sm leading-relaxed mb-5">
-                    {contactInfo.bio}
-                  </p>
-
-                  {/* Contact details */}
-                  <ul className="space-y-1.5 mb-6 text-sm">
-                    <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('mail')}</span>{' '}
-                      <a
-                        href={`mailto:${contactInfo.mail}`}
-                        className="text-accent hover:underline ml-2"
-                        onClick={(e) => e.stopPropagation()}
-                      >
+                  <ul className="space-y-4 mb-10 text-sm font-sans text-muted-foreground">
+                    <li className="flex flex-col gap-1">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('mail')}</span>
+                      <a href={`mailto:${contactInfo.mail}`} className="text-foreground hover:text-primary transition-colors">
                         {contactInfo.mail}
                       </a>
                     </li>
-                    <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('phone')}</span>{' '}
-                      <span className="text-white ml-2">{contactInfo.phone}</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('languages')}</span>{' '}
-                      <span className="text-white ml-2">English, Spanish</span>
-                    </li>
-                    <li>
-                      <span className="text-white/40 font-semibold uppercase tracking-wider text-xs">{t('location')}</span>{' '}
-                      <span className="text-white ml-2">{contactInfo.location}</span>
+                    <li className="flex flex-col gap-1">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('location')}</span>
+                      <span className="text-foreground">{contactInfo.location}</span>
                     </li>
                   </ul>
 
-                  {/* Action buttons */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-4">
                     {HERO_SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
                       <a
                         key={label}
                         href={href}
-                        target={href.startsWith('http') ? '_blank' : undefined}
-                        rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-2 px-4 py-2 border border-white/30 text-white text-xs font-semibold uppercase tracking-wider rounded-sm hover:border-accent hover:text-accent transition-all duration-200"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 border border-border bg-white text-foreground hover:border-primary hover:text-primary transition-all duration-300 rounded-none shadow-sm"
+                        aria-label={label}
                       >
-                        <Icon className="w-3.5 h-3.5" aria-hidden="true" />
-                        {label}
+                        <Icon className="w-4 h-4" />
                       </a>
                     ))}
                   </div>

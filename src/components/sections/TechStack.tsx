@@ -43,21 +43,13 @@ function TechPill({ tech }: { tech: (typeof technologies)[number] }) {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={
-        hovered
-          ? {
-            borderColor: tech.color,
-            backgroundColor: `${tech.color}14`,
-          }
-          : undefined
-      }
-      className="flex items-center gap-2.5 bg-background border border-foreground/10 rounded-full px-4 py-2 transition-colors duration-200"
+      className="flex items-center gap-3 bg-white border border-border rounded-none px-4 py-3 transition-all duration-200 ease-out cursor-default hover:border-primary hover:-translate-y-0.5"
     >
-      <span
-        className="shrink-0 rounded-full"
-        style={{ width: 8, height: 8, backgroundColor: tech.color }}
+      <div 
+        className="w-1.5 h-1.5 rounded-none rotate-45"
+        style={{ backgroundColor: tech.color }}
       />
-      <span className="text-sm font-medium text-foreground">{tech.name}</span>
+      <span className="text-[10px] font-mono font-medium uppercase tracking-[0.2em] text-foreground/80">{tech.name}</span>
     </div>
   );
 }
@@ -65,48 +57,55 @@ function TechPill({ tech }: { tech: (typeof technologies)[number] }) {
 export const TechStack: React.FC = () => {
   const { t } = useTranslation(['techstack']);
   return (
-    <section className="py-24 bg-muted border-b border-foreground/10 overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="section-padding bg-muted/30 border-b border-border relative overflow-hidden">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* Heading */}
         <motion.div 
-          className="mb-14"
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: false, amount: 0.3 }}
+          className="mb-24 flex flex-col items-center text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          viewport={{ once: true }}
         >
-          <h2 className="text-5xl font-bold text-foreground uppercase tracking-normal mb-3">
-            {t('title1')} <span className="text-secondary">{t('title2')}</span>
+          <div className="mb-6 flex items-center gap-4 w-full">
+            <span className="h-px flex-1 bg-border" />
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+              {t('title1')}
+            </span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <h2 className="text-5xl md:text-6xl font-serif text-foreground tracking-tight mb-8">
+            {t('title2')}
           </h2>
-          <p className="text-xl text-foreground/60 font-medium max-w-xl">
+          <p className="text-lg text-muted-foreground font-sans max-w-xl italic mx-auto">
             {t('description')}
           </p>
         </motion.div>
 
         {/* Category rows */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-16">
           {Object.entries(grouped).map(([category, techs], index) => (
             <motion.div 
               key={category} 
-              className="flex flex-col sm:flex-row sm:gap-8"
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="flex flex-col md:flex-row gap-8 md:gap-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ 
-                duration: 0.7, 
-                ease: [0.16, 1, 0.3, 1],
+                duration: 0.8, 
+                ease: 'easeOut',
                 delay: index * 0.05
               }}
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true }}
             >
               {/* Left: category label */}
-              <div className="sm:w-28 shrink-0 mb-2 sm:mb-0 pt-1.5">
-                <span className="text-sm uppercase tracking-widest text-foreground/50 font-medium">
+              <div className="md:w-32 shrink-0 pt-1">
+                <span className="font-mono text-[10px] uppercase font-bold tracking-[0.3em] text-primary">
                   {t(`categories.${category}`, { defaultValue: category })}
                 </span>
               </div>
 
               {/* Right: pills */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-4 flex-1">
                 {techs.map((tech) => (
                   <TechPill key={tech.name} tech={tech} />
                 ))}

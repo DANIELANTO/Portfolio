@@ -4,6 +4,7 @@ import type { Project } from '../../../data/types';
 import { ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ImageCarousel } from './ImageCarousel';
+import { Button } from '../../ui/Button';
 
 interface ProjectCardProps {
   project: Project;
@@ -12,8 +13,8 @@ interface ProjectCardProps {
 }
 
 const TechPill: React.FC<{ label: string }> = ({ label }) => (
-  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                   bg-foreground/6 text-foreground/60 border border-foreground/10
+  <span className="inline-flex items-center px-2 py-0.5 rounded-none text-[9px] font-mono font-medium uppercase tracking-[0.1em]
+                   bg-secondary text-muted-foreground border border-border
                    whitespace-nowrap">
     {label}
   </span>
@@ -28,53 +29,51 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex flex-col bg-background border border-foreground/10
-                 hover:border-foreground/30 hover:shadow-xl hover:-translate-y-1
-                 transition-all duration-300 overflow-hidden rounded-xl"
+      transition={{ duration: 0.8, delay: index * 0.1, ease: 'easeOut' }}
+      className="group flex flex-col bg-card border border-border
+                 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-none
+                 relative"
     >
       {/* ── Image area ─────────────────────────────────────────── */}
-      <div className="relative w-full aspect-video overflow-hidden bg-muted rounded-xl mx-0">
-        <ImageCarousel images={project.images} altText={project.title} />
+      <div className="relative w-full aspect-[16/10] overflow-hidden bg-muted rounded-none border-b border-border">
+        <div className="transition-all duration-700 ease-out group-hover:scale-105">
+          <ImageCarousel images={project.images} altText={project.title} />
+        </div>
 
         {/* Category badge — top-left overlay */}
-        <span className="absolute top-3 left-3 z-10
-                         inline-flex items-center px-2.5 py-1
-                         bg-background/90 backdrop-blur-sm
-                         border border-foreground/15
-                         rounded-full text-xs font-semibold text-foreground/70
-                         shadow-sm">
+        <span className="absolute top-4 left-4 z-10
+                         inline-flex items-center px-3 py-1.5
+                         bg-white text-primary
+                         text-[9px] font-mono font-black uppercase tracking-[0.2em] shadow-sm">
           {project.category}
         </span>
-
       </div>
 
       {/* ── Body ───────────────────────────────────────────────── */}
-      <div className="flex flex-col flex-1 px-5 pt-4 pb-5 gap-3">
+      <div className="flex flex-col flex-1 px-8 pt-8 pb-8 gap-6">
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-foreground leading-snug
-                       group-hover:text-primary transition-colors duration-200">
+        <h3 className="text-3xl font-serif text-foreground leading-tight tracking-tight
+                       group-hover:text-primary transition-colors duration-300">
           {project.title}
         </h3>
 
         {/* Short description */}
-        <p className="text-sm text-foreground/55 leading-relaxed line-clamp-2">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 font-sans">
           {description}
         </p>
 
         {/* Tech stack pills */}
-        <div className="flex flex-wrap gap-1.5 items-center">
+        <div className="flex flex-wrap gap-2 items-center">
           {visibleStack.map((tech) => (
             <TechPill key={tech} label={tech} />
           ))}
           {hiddenCount > 0 && (
             <span
-              className="text-xs text-foreground/35 font-medium pl-0.5"
-              aria-label={`${hiddenCount} more technologies`}
+              className="text-[9px] font-mono text-muted-foreground/50 uppercase tracking-widest pl-1"
             >
               +{hiddenCount}
             </span>
@@ -82,32 +81,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, onClic
         </div>
 
         {/* CTA Button */}
-        <div className="mt-auto pt-3 border-t border-foreground/8">
-          <button
+        <div className="mt-4 pt-6 border-t border-border">
+          <Button
+            variant="primary"
             onClick={onClick}
-            className="group/btn relative w-full overflow-hidden rounded-lg
-                       flex items-center justify-between
-                       px-4 py-2.5
-                       bg-foreground text-background
-                       text-sm font-semibold tracking-wide
-                       transition-all duration-300
-                       hover:bg-primary hover:text-white hover:shadow-md
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            className="w-full text-xs font-mono uppercase tracking-[0.2em]"
           >
-            {/* shimmer sweep */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -translate-x-full
-                         bg-gradient-to-r from-transparent via-white/12 to-transparent
-                         transition-transform duration-500 ease-in-out
-                         group-hover/btn:translate-x-full"
-            />
-            <span className="relative">{t('viewDetails')}</span>
-            <ArrowUpRight
-              className="relative w-4 h-4 transition-transform duration-300
-                         group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-            />
-          </button>
+            <span>{t('viewDetails')}</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </Button>
         </div>
       </div>
     </motion.article>

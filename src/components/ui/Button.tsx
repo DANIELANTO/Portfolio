@@ -6,12 +6,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, className = '', ...props }) => {
-  const baseStyles = 'h-14 px-8 rounded-md font-bold tracking-wider transition-all duration-200 uppercase';
+  const baseStyles = 'min-h-[44px] px-8 py-3 rounded-none font-sans font-semibold tracking-tight transition-all duration-200 ease-out flex items-center justify-center gap-2 border touch-manipulation focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2';
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-blue-600 hover:scale-105',
-    secondary: 'bg-muted text-foreground hover:bg-gray-200 hover:scale-105',
-    outline: 'border-4 border-foreground text-foreground bg-transparent hover:bg-foreground hover:text-white hover:scale-105',
+    primary: 'bg-primary text-white border-primary hover:bg-[#D4A84B] hover:shadow-lg hover:-translate-y-0.5',
+    secondary: 'bg-muted text-foreground border-border hover:bg-border/50 hover:-translate-y-0.5',
+    outline: 'border-foreground text-foreground bg-transparent hover:bg-foreground hover:text-white hover:-translate-y-0.5',
   };
 
   return (

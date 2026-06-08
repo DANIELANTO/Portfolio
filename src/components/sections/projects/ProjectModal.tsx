@@ -13,8 +13,7 @@ interface ProjectModalProps {
 
 /** Compact pill used inside the modal stack section */
 const StackPill: React.FC<{ label: string }> = ({ label }) => (
-  <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold
-                   bg-primary/10 text-primary border border-primary/20 whitespace-nowrap">
+  <span className="inline-flex items-center px-3 py-1 bg-muted text-muted-foreground border border-border text-[9px] font-mono font-bold uppercase tracking-widest">
     {label}
   </span>
 );
@@ -41,54 +40,56 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center
-                 bg-black/80 backdrop-blur-sm p-0 sm:p-4"
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 flex items-center justify-center
+                 bg-foreground/20 backdrop-blur-md p-4 sm:p-12"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={project.title}
     >
       <motion.div
-        initial={{ y: 60, opacity: 0, scale: 0.97 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={{ y: 60, opacity: 0, scale: 0.97 }}
-        transition={{ type: 'spring', damping: 30, stiffness: 350 }}
-        className="relative bg-background w-full sm:max-w-4xl
-                   max-h-[96dvh] sm:max-h-[90vh]
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 20, opacity: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="relative bg-white w-full sm:max-w-4xl
+                   max-h-[100dvh] sm:max-h-[90vh]
                    overflow-y-auto
-                   rounded-t-2xl sm:rounded-xl
-                   border border-foreground/10
+                   rounded-none
+                   border border-border
                    shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
 
         {/* ── Sticky Header ──────────────────────────────────────── */}
-        <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm
-                        border-b border-foreground/10
-                        flex items-center justify-between gap-4 px-5 py-4">
-          <h2 className="text-lg sm:text-xl font-bold text-foreground tracking-tight leading-tight truncate">
-            {project.title}
-          </h2>
+        <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-md
+                        border-b border-border
+                        flex items-center justify-between gap-4 px-8 py-6">
+          <div className="flex items-center gap-6">
+            <span className="font-mono text-[10px] text-primary uppercase tracking-[0.3em]">Project Overview</span>
+            <h2 className="text-2xl md:text-3xl font-serif text-foreground tracking-tight">
+              {project.title}
+            </h2>
+          </div>
 
           <button
             type="button"
             onClick={onClose}
             aria-label="Close project details"
-            className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg
-                       bg-foreground/8 hover:bg-red-500 hover:text-white text-foreground
-                       border border-foreground/15 hover:border-red-500
-                       transition-colors duration-200
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="flex-shrink-0 flex items-center justify-center w-10 h-10
+                       bg-muted hover:bg-red-50 text-muted-foreground hover:text-white
+                       border border-border hover:border-red-500
+                       transition-all duration-300"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="px-5 py-6 sm:px-8 sm:py-8 flex flex-col gap-8">
+        <div className="px-8 py-12 sm:px-12 sm:py-16 flex flex-col gap-16">
 
           {/* ── Video preview ──────────────────────────────────────── */}
-          <div className="w-full aspect-video overflow-hidden rounded-lg bg-gray-100 border border-foreground/10">
+          <div className="w-full aspect-video overflow-hidden bg-muted border border-border shadow-sm">
             <video
               src={project.videoUrl}
               autoPlay
@@ -100,54 +101,42 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* ── Challenge & Solution ────────────────────────────────── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
 
             {/* Challenge */}
-            <div className="relative flex flex-col gap-3 p-5 rounded-lg
-                            bg-accent/5 border border-accent/25
-                            overflow-hidden">
-              {/* top accent bar */}
-              <span className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-accent via-accent/60 to-transparent" />
-              <div className="flex items-center gap-2.5">
-                <span className="flex items-center justify-center w-7 h-7 rounded-md bg-accent/15 border border-accent/30 flex-shrink-0">
-                  <Zap className="w-3.5 h-3.5 text-accent" />
-                </span>
-                <h3 className="text-xs font-bold text-foreground/50 uppercase tracking-[0.15em]">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-primary" />
+                <h3 className="font-mono text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
                   {t('theChallenge')}
                 </h3>
               </div>
-              <p className="text-sm text-foreground/75 leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed font-sans italic">
                 {i18n.language.startsWith('es') ? project.challenge_es : project.challenge_en}
               </p>
             </div>
 
             {/* Solution */}
-            <div className="relative flex flex-col gap-3 p-5 rounded-lg
-                            bg-primary/5 border border-primary/20
-                            overflow-hidden">
-              {/* top accent bar */}
-              <span className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-primary/60 to-transparent" />
-              <div className="flex items-center gap-2.5">
-                <span className="flex items-center justify-center w-7 h-7 rounded-md bg-primary/10 border border-primary/25 flex-shrink-0">
-                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
-                </span>
-                <h3 className="text-xs font-bold text-foreground/50 uppercase tracking-[0.15em]">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-8 bg-primary" />
+                <h3 className="font-mono text-[10px] font-bold text-primary uppercase tracking-[0.3em]">
                   {t('theSolution')}
                 </h3>
               </div>
-              <p className="text-sm text-foreground/75 leading-relaxed">
+              <p className="text-base text-muted-foreground leading-relaxed font-sans">
                 {i18n.language.startsWith('es') ? project.solution_es : project.solution_en}
               </p>
             </div>
           </div>
 
           {/* ── Stack ─────────────────────────────────────────────── */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <Code2 className="w-4 h-4 text-primary" />
-              <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">{t('stack')}</h3>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-6">
+              <h3 className="font-mono text-[10px] font-bold text-foreground/40 uppercase tracking-[0.3em]">{t('stack')}</h3>
+              <div className="flex-1 h-px bg-border" />
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {project.stack.map((tech) => (
                 <StackPill key={tech} label={tech} />
               ))}
@@ -155,29 +144,32 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* ── Engineering & Architecture ────────────────────────── */}
-          <div className="rounded-xl bg-foreground text-background overflow-hidden border border-accent/30">
-            <div className="flex items-center gap-3 px-6 py-4 border-b border-white/10">
-              <Layers className="w-5 h-5 text-accent flex-shrink-0" />
-              <h3 className="text-base font-bold uppercase tracking-wide text-white">
-                {t('engineering')}
-              </h3>
+          <div className="bg-muted/30 border border-border">
+            <div className="flex items-center justify-between px-10 py-6 border-b border-border bg-white">
+              <div className="flex items-center gap-4">
+                <Layers className="w-5 h-5 text-primary" />
+                <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-foreground">
+                  {t('engineering')}
+                </h3>
+              </div>
+              <span className="font-mono text-[8px] text-muted-foreground uppercase tracking-widest">Document: Technical_Specification</span>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-border">
               {/* Left — explanation + key points */}
-              <div className="p-6 flex flex-col gap-5">
-                <p className="text-sm text-gray-300 leading-relaxed">
+              <div className="p-10 flex flex-col gap-10">
+                <p className="text-base text-muted-foreground leading-relaxed font-sans italic">
                   {i18n.language.startsWith('es') ? project.engineering.architectureExplanation_es : project.engineering.architectureExplanation_en}
                 </p>
 
-                <div>
-                  <h4 className="text-xs font-bold text-accent uppercase tracking-widest mb-3">
+                <div className="flex flex-col gap-6">
+                  <h4 className="font-mono text-[10px] font-bold text-primary uppercase tracking-widest">
                     {t('keyPoints')}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-4">
                     {(i18n.language.startsWith('es') ? project.engineering.technicalKeyPoints_es : project.engineering.technicalKeyPoints_en).map((point, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-sm text-gray-200">
-                        <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-accent" />
+                      <li key={i} className="flex items-start gap-4 text-sm text-muted-foreground font-medium">
+                        <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 bg-primary" />
                         {point}
                       </li>
                     ))}
@@ -186,11 +178,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               </div>
 
               {/* Right — diagram */}
-              <div className="p-6 flex flex-col gap-3">
-                <h4 className="text-xs font-bold text-accent uppercase tracking-widest">
+              <div className="p-10 flex flex-col gap-8 bg-white/50">
+                <h4 className="font-mono text-[10px] font-bold text-primary uppercase tracking-widest">
                   {t('architectureDiagram')}
                 </h4>
-                <div className="rounded-md overflow-hidden border border-white/15 bg-white/5">
+                <div className="border border-border p-2 bg-white">
                   <DiagramViewer diagramUrl={project.engineering.diagramUrl} />
                 </div>
               </div>
@@ -198,18 +190,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
 
           {/* ── Footer actions ─────────────────────────────────────── */}
-          <div className="flex items-center justify-between gap-4 pt-2 border-t border-foreground/10">
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 text-sm"
-              onClick={() => window.open(project.githubUrl, '_blank', 'noopener,noreferrer')}
-            >
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-8 border-t border-border">
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-foreground hover:text-primary transition-colors py-2 px-4 border border-transparent hover:border-border">
               <GitBranch className="w-4 h-4" />
               {t('sourceCode')}
-            </Button>
+            </a>
             <Button
               variant="primary"
-              className="px-6 text-sm"
+              className="px-12 text-xs font-mono uppercase tracking-[0.2em]"
               onClick={onClose}
             >
               {t('closeDetails')}

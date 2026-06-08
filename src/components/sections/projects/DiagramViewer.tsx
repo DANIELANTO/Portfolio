@@ -96,27 +96,26 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
         type="button"
         onClick={open}
         aria-label="Open architecture diagram in full view"
-        className="group relative w-full overflow-hidden border border-foreground/10 hover:border-primary/60
-                   transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="group relative w-full overflow-hidden border border-border hover:border-primary/60
+                   transition-all duration-300 focus:outline-none"
       >
-        <div className="w-full bg-gray-50 flex items-center justify-center" style={{ minHeight: '160px', maxHeight: '220px' }}>
+        <div className="w-full bg-white flex items-center justify-center p-6" style={{ minHeight: '160px', maxHeight: '220px' }}>
           <img
             src={diagramUrl}
             alt={t('architectureDiagram')}
-            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-            style={{ maxHeight: '220px', display: 'block' }}
+            className="w-full h-full object-contain transition-all duration-700 ease-out group-hover:scale-[1.05]"
+            style={{ maxHeight: '180px', display: 'block' }}
           />
         </div>
 
         {/* Hover overlay */}
         <div className="absolute inset-0 flex items-center justify-center
-                        bg-foreground/0 group-hover:bg-foreground/30
+                        bg-white/0 group-hover:bg-white/40
                         backdrop-blur-[0px] group-hover:backdrop-blur-[2px]
                         transition-all duration-300">
-          <span className="flex items-center gap-2 px-4 py-2 rounded
-                           bg-primary text-white text-sm font-semibold uppercase tracking-wide
-                           opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0
-                           transition-all duration-300 shadow-lg">
+          <span className="flex items-center gap-3 px-6 py-3 bg-white text-primary text-[10px] font-mono font-bold uppercase tracking-[0.2em]
+                           opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0
+                           transition-all duration-300 shadow-lg border border-border">
             <ZoomIn className="w-4 h-4" />
             {t('viewDiagram')}
           </span>
@@ -130,46 +129,55 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-md"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-foreground/20 backdrop-blur-xl"
             onClick={close}
             role="dialog"
             aria-modal="true"
             aria-label="Architecture Diagram Viewer"
           >
             <motion.div
-              initial={{ scale: 0.92, opacity: 0 }}
+              initial={{ scale: 0.98, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.92, opacity: 0 }}
-              transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-              className="relative w-full max-w-5xl bg-white rounded-lg overflow-hidden shadow-2xl"
+              exit={{ scale: 0.98, opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="relative w-full max-w-6xl bg-white border border-border rounded-none overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal header */}
-              <div className="flex items-center justify-between px-5 py-3 bg-gray-900 border-b border-white/10">
-                <h3 className="text-white font-bold tracking-wide text-sm uppercase">
-                  {t('architectureDiagram')}
-                </h3>
+              <div className="flex items-center justify-between px-8 py-6 bg-white border-b border-border">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-[9px] text-primary uppercase tracking-[0.4em]">Document//Viewer</span>
+                  <h3 className="text-foreground font-serif text-lg tracking-tight uppercase">
+                    {t('architectureDiagram')}
+                  </h3>
+                </div>
                 <button
                   type="button"
                   onClick={close}
                   aria-label="Close diagram viewer"
-                  className="flex items-center justify-center w-8 h-8 rounded
-                             bg-white/10 hover:bg-red-500 text-white
-                             transition-colors duration-200
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="flex items-center justify-center w-10 h-10 rounded-none
+                             bg-muted hover:bg-red-50 text-muted-foreground hover:text-white
+                             border border-border hover:border-red-500
+                             transition-all duration-300"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Diagram — dynamic zoom and pan */}
               <div 
                 ref={containerRef}
-                className="bg-gray-50 relative flex items-center justify-center p-4 overflow-hidden"
-                style={{ height: 'calc(90vh - 56px)' }}
+                className="bg-muted/30 relative flex items-center justify-center p-12 overflow-hidden"
+                style={{ height: 'calc(90vh - 88px)' }}
                 onWheel={handleWheel}
               >
+                {/* Viewport decoration */}
+                <div className="absolute top-6 left-8 flex items-center gap-3 font-mono text-[8px] text-muted-foreground uppercase tracking-widest pointer-events-none">
+                  <span className="w-2 h-2 bg-primary rotate-45" />
+                  Technical Analysis Viewport
+                </div>
+                
                 <motion.img
                   ref={imgRef}
                   src={diagramUrl}

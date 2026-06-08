@@ -55,16 +55,24 @@ const CardSkeleton: React.FC = () => (
 export const ProjectsGallery: React.FC = () => {
   const { t } = useTranslation(['projects']);
   return (
-    <section id="projects" className="py-24 bg-background border-b-8 border-foreground">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="projects" className="section-padding bg-background border-b border-border relative">
+      <div className="max-w-5xl mx-auto px-6">
 
         {/* Section header */}
-        <div className="mb-12">
-          <h2 className="text-5xl font-extrabold text-foreground uppercase tracking-tight mb-4">
-            {t('title1')}<span className="text-primary">{t('title2')}</span>
+        <div className="mb-24 flex flex-col items-center text-center">
+          <div className="mb-6 flex items-center gap-4 w-full">
+            <span className="h-px flex-1 bg-border" />
+            <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+              {t('title1')}
+            </span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          
+          <h2 className="text-5xl md:text-6xl font-serif text-foreground tracking-tight mb-8">
+            {t('title2')}
           </h2>
-          <div className="w-16 h-1.5 bg-accent mb-5 rounded-full" />
-          <p className="text-base text-foreground/60 font-medium max-w-xl leading-relaxed">
+          
+          <p className="text-lg text-muted-foreground font-sans max-w-xl leading-relaxed italic">
             {t('description')}
           </p>
         </div>
@@ -72,8 +80,8 @@ export const ProjectsGallery: React.FC = () => {
         {/* Grid with suspense boundary */}
         <React.Suspense
           fallback={
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {Array.from({ length: 3 }).map((_, i) => <CardSkeleton key={i} />)}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)}
             </div>
           }
         >

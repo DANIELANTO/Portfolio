@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '../ui/Button';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -49,55 +50,44 @@ export const Footer: React.FC = () => {
   const contactInfo = getContactInfo(t);
 
   return (
-    <footer id="contact" aria-label="Site footer">
+    <footer id="contact" aria-label="Site footer" className="bg-background border-t border-border">
 
       {/* ── Pre-footer CTA ───────────────────────────────────────────────── */}
-      <div className="bg-foreground border-b-8 border-accent">
-        <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="section-padding border-b border-border relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 items-center">
 
           {/* Left: Headline */}
-          <div>
-            <p className="text-accent text-sm font-bold uppercase tracking-widest mb-4">
-              {t('openTo')}
-            </p>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.1]">
+          <div className="flex flex-col items-start gap-8">
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+                {t('openTo')}
+              </span>
+              <span className="h-px w-12 bg-border" />
+            </div>
+            <h2 className="text-5xl md:text-7xl font-serif text-foreground leading-tight tracking-tight">
               {t('readyToScale')}
               <br />
-              <span className="text-accent">{t('nextSystem')}</span>
+              <span className="italic text-primary">{t('nextSystem')}</span>
             </h2>
-            <p className="mt-5 text-white/60 text-base max-w-md leading-relaxed">
+            <p className="text-lg text-muted-foreground font-sans max-w-md leading-relaxed italic">
               {t('description')}
             </p>
           </div>
 
           {/* Right: CTA block */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-start sm:items-center lg:items-start xl:items-center gap-4 lg:justify-end">
+          <div className="flex flex-col sm:flex-row lg:flex-col gap-6 lg:items-end">
             <a
               href={`mailto:${contactInfo.mail}`}
-              aria-label="Send me an email"
-              className="
-                inline-flex items-center gap-3 px-8 py-4
-                bg-accent text-foreground
-                font-bold text-base tracking-wide
-                transition-all duration-200
-                hover:brightness-110 hover:-translate-y-0.5
-                active:translate-y-0
-              "
+              className="min-w-[240px]"
             >
-              {t('startConversation')}
-              <ArrowUpRight className="w-5 h-5" aria-hidden="true" />
+              <Button variant="primary" className="w-full text-xs font-mono uppercase tracking-[0.2em]">
+                {t('startConversation')}
+                <ArrowUpRight className="w-5 h-5" />
+              </Button>
             </a>
             <a
               href="#projects"
-              aria-label="View my projects"
-              className="
-                inline-flex items-center gap-3 px-8 py-4
-                bg-transparent text-white border-2 border-white/20
-                font-bold text-base tracking-wide
-                transition-all duration-200
-                hover:border-white/60 hover:-translate-y-0.5
-                active:translate-y-0
-              "
+              className="flex items-center justify-center gap-3 px-8 py-3 border border-border bg-white font-mono text-[10px] uppercase tracking-widest hover:border-primary hover:text-primary transition-all duration-300 min-h-[44px]"
             >
               {t('viewProjects')}
             </a>
@@ -106,91 +96,72 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Contact Info Block ────────────────────────────────────────────── */}
-      <div className="bg-foreground border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      {/* ── Details Block ─────────────────────────────────────────────────── */}
+      <div className="py-24 border-b border-border">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20">
 
-          {/* Left: Bio + details */}
-          <div>
-            <p className="text-accent text-xs font-bold uppercase tracking-widest mb-4">{t('contact')}</p>
-            <p className="text-white/60 text-sm leading-relaxed max-w-lg mb-6">
-              {contactInfo.bio}
-            </p>
-            <ul className="space-y-2 text-sm">
-              <li className="flex gap-2">
-                <span className="text-white/40 font-semibold uppercase tracking-wider text-xs w-20 shrink-0 pt-0.5">{t('mail')}</span>
+          {/* Contact Details */}
+          <div className="flex flex-col gap-10">
+            <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{t('contact')}</h3>
+            <div className="flex flex-col gap-8">
+              <p className="text-xl font-serif text-muted-foreground leading-relaxed italic pr-12">
+                "{contactInfo.bio}"
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                <div className="flex flex-col gap-2">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('mail')}</span>
+                  <a href={`mailto:${contactInfo.mail}`} className="text-sm font-sans font-medium hover:text-primary transition-colors">
+                    {contactInfo.mail}
+                  </a>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-foreground/40">{t('location')}</span>
+                  <span className="text-sm font-sans font-medium">{contactInfo.location}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex flex-col gap-10 lg:items-end">
+            <h3 className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{t('connect')}</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto">
+              {ACTION_LINKS.map(({ label, href }) => (
                 <a
-                  href={`mailto:${contactInfo.mail}`}
-                  className="text-accent hover:underline"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-6 px-6 py-4 border border-border bg-white text-[10px] font-mono font-bold uppercase tracking-widest hover:border-primary hover:text-primary transition-all duration-300 min-h-[44px]"
                 >
-                  {contactInfo.mail}
+                  {label}
+                  <ArrowUpRight className="w-3 h-3" />
                 </a>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-white/40 font-semibold uppercase tracking-wider text-xs w-20 shrink-0 pt-0.5">{t('phone')}</span>
-                <span className="text-white">{contactInfo.phone}</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-white/40 font-semibold uppercase tracking-wider text-xs w-20 shrink-0 pt-0.5">{t('languages')}</span>
-                <span className="text-white">English, Spanish</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-white/40 font-semibold uppercase tracking-wider text-xs w-20 shrink-0 pt-0.5">{t('location')}</span>
-                <span className="text-white">{contactInfo.location}</span>
-              </li>
-            </ul>
+              ))}
+            </div>
           </div>
-
-          {/* Right: Action buttons */}
-          <div className="flex flex-col justify-start lg:items-end gap-3">
-            <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-1">
-              {t('connect')}
-            </p>
-            {ACTION_LINKS.map(({ label, href, accentClass }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                aria-label={label}
-                className={`
-                  inline-flex items-center gap-2 px-6 py-2.5
-                  border border-white/20 text-white/60
-                  text-xs font-bold tracking-widest
-                  transition-all duration-200
-                  ${accentClass}
-                `}
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
         </div>
       </div>
 
-      {/* ── Bottom bar ───────────────────────────────────────────────────── */}
-      <div className="bg-foreground border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-
-          {/* Brand */}
-          <address className="not-italic flex flex-col items-center md:items-start gap-1">
-            <span className="text-2xl font-extrabold tracking-tighter text-white">
-              PORTFOLIO<span className="text-accent">.</span>
+      {/* ── Brand Bar ────────────────────────────────────────────────────── */}
+      <div className="py-12">
+        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <span className="text-3xl font-serif italic text-foreground leading-none">
+              Daniel Romero
             </span>
-            <span className="text-white/40 text-sm">
-              © {year} {t('rights')}
+            <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/30">
+              © {year} // Senior Software Engineer
             </span>
-          </address>
+          </div>
 
-          {/* Nav links */}
-          <nav aria-label="Footer navigation">
-            <ul className="flex items-center gap-6">
+          <nav>
+            <ul className="flex flex-wrap justify-center gap-12">
               {NAV_LINKS.map(({ labelKey, href }) => (
                 <li key={labelKey}>
                   <a
                     href={href}
-                    className="text-white/50 text-sm font-medium hover:text-white transition-colors duration-150"
+                    className="font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-foreground/40 hover:text-primary transition-colors duration-300"
                   >
                     {t(`nav.${labelKey}`, { defaultValue: labelKey })}
                   </a>
@@ -198,10 +169,8 @@ export const Footer: React.FC = () => {
               ))}
             </ul>
           </nav>
-
         </div>
       </div>
-
     </footer>
   );
 };
