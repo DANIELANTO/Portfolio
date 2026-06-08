@@ -37,12 +37,8 @@ const grouped = categoryOrder.reduce<Record<string, typeof technologies>>(
 );
 
 function TechPill({ tech }: { tech: (typeof technologies)[number] }) {
-  const [hovered, setHovered] = React.useState(false);
-
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       className="flex items-center gap-3 bg-white border border-accent/20 rounded-2xl px-5 py-3 transition-all duration-300 ease-out cursor-default hover:border-primary/50 hover:shadow-md hover:-translate-y-1"
     >
       <div 

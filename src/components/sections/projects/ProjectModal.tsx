@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { X, GitBranch, Code2, Layers, Zap, CheckCircle } from 'lucide-react';
+import { X, GitBranch, Layers } from 'lucide-react';
 import type { Project } from '../../../data/types';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../ui/Button';
