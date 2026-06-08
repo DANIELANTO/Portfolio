@@ -1,20 +1,78 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Geist Sans — loaded from npm package */
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Mono */
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @theme {
-  --color-background: #F7F3EF;
-  --color-background-secondary: #EAE0D4;
-  --color-foreground: #2B2A28;
-  --color-primary: #8B6E4D;
-  --color-secondary: #A68D68;
-  --color-accent: #CBBCAB;
-  --color-muted: #EAE0D4;
-  --color-border: #CBBCAB;
-  --color-card: #FFFFFF;
-  --font-serif: "Playfair Display", serif;
-  --font-sans: "Inter", sans-serif;
-  --radius-card: 1.5rem;
-  --radius-image: 2rem;
+  /* ── Color Palette: High-Contrast Monochrome + Accent ── */
+  --color-background:           #FFFFFF;
+  --color-background-secondary: #F4F4F5; /* Zinc 100 */
+  --color-foreground:           #09090B; /* Zinc 950 */
+  --color-primary:              #0070F3; /* Electric Blue — terminal / link accent */
+  --color-secondary:            #71717A; /* Zinc 500 — muted labels */
+  --color-accent:               #E4E4E7; /* Zinc 200 — subtle borders */
+  --color-muted:                #F4F4F5; /* Zinc 100 */
+  --color-border:               #E4E4E7; /* Zinc 200 */
+  --color-card:                 #FFFFFF;
+
+  /* ── Typography ── */
+  --font-sans: 'Geist', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
+
+  /* ── Radii: sharp & precise ── */
+  --radius-card:   0.5rem;   /* 8px  */
+  --radius-button: 0.375rem; /* 6px  */
 }
 
 @layer base {
@@ -28,10 +86,12 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  
+
+  /* All headings: sans-serif, tight tracking — REQ-TEC-002 + AC-TEC-001 */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 
@@ -39,9 +99,20 @@
   .section-padding {
     @apply py-32 md:py-40;
   }
-  
+
+  /* Wireframe grid pattern — replaces dot-pattern, per AC-TEC-004 */
+  .grid-pattern {
+    background-image:
+      linear-gradient(to right, #E4E4E7 1px, transparent 1px),
+      linear-gradient(to bottom, #E4E4E7 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Legacy alias — kept so existing JSX doesn't break, renders same as grid-pattern */
   .dot-pattern {
-    background-image: radial-gradient(var(--color-accent) 1px, transparent 1px);
-    background-size: 20px 24px;
+    background-image:
+      linear-gradient(to right, #E4E4E7 1px, transparent 1px),
+      linear-gradient(to bottom, #E4E4E7 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 }

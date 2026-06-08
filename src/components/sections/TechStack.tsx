@@ -39,13 +39,13 @@ const grouped = categoryOrder.reduce<Record<string, typeof technologies>>(
 function TechPill({ tech }: { tech: (typeof technologies)[number] }) {
   return (
     <div
-      className="flex items-center gap-3 bg-white border border-accent/20 rounded-2xl px-5 py-3 transition-all duration-300 ease-out cursor-default hover:border-primary/50 hover:shadow-md hover:-translate-y-1"
+      className="flex items-center gap-3 bg-[#F4F4F5] border border-[#E4E4E7] rounded-md px-4 py-2.5 transition-all duration-150 ease-out cursor-default hover:border-[#0070F3]/50 hover:bg-white"
     >
       <div 
-        className="w-2 h-2 rounded-full"
+        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
         style={{ backgroundColor: tech.color }}
       />
-      <span className="text-xs font-sans font-bold uppercase tracking-widest text-foreground/80">{tech.name}</span>
+      <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#09090B]/80">{tech.name}</span>
     </div>
   );
 }
@@ -65,16 +65,16 @@ export const TechStack: React.FC = () => {
         >
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3">
-              <span className="w-10 h-0.5 bg-primary" />
-              <span className="font-sans text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">
+              <span className="w-10 h-px bg-[#0070F3]" />
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-[#71717A]">
                 {t('title1')}
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-serif text-foreground tracking-tight leading-tight">
+            <h2 className="text-5xl md:text-6xl font-sans text-foreground tracking-tight leading-tight">
               {t('title2')}
             </h2>
           </div>
-          <p className="text-lg text-foreground/60 font-sans max-w-sm leading-relaxed italic border-l-2 border-accent/30 pl-8 pb-2">
+          <p className="text-lg text-[#71717A] font-sans max-w-sm leading-relaxed border-l border-[#E4E4E7] pl-6 pb-2">
             {t('description')}
           </p>
         </motion.div>
@@ -96,7 +96,7 @@ export const TechStack: React.FC = () => {
             >
               {/* Left: category label */}
               <div className="pt-2">
-                <span className="font-sans text-[12px] uppercase font-black tracking-[0.4em] text-primary/60">
+                <span className="font-mono text-[11px] uppercase font-bold tracking-[0.3em] text-[#0070F3]/70">
                   {t(`categories.${category}`, { defaultValue: category })}
                 </span>
               </div>

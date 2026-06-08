@@ -60,9 +60,9 @@ const CardSkeleton: React.FC = () => (
 export const ProjectsGallery: React.FC = () => {
   const { t } = useTranslation(['projects']);
   return (
-    <section id="projects" className="section-padding bg-background-secondary border-b border-accent/20 relative overflow-hidden">
-      {/* Subtle Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-[0.2] pointer-events-none" />
+    <section id="projects" className="section-padding bg-[#F4F4F5] border-b border-[#E4E4E7] relative overflow-hidden">
+      {/* Wireframe Grid Pattern */}
+      <div className="absolute inset-0 grid-pattern opacity-[0.4] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
@@ -70,16 +70,16 @@ export const ProjectsGallery: React.FC = () => {
         <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3">
-              <span className="w-12 h-0.5 bg-primary" />
-              <span className="font-sans text-[11px] font-bold uppercase tracking-[0.3em] text-secondary">
+              <span className="w-12 h-px bg-[#0070F3]" />
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-[#71717A]">
                 {t('title1')}
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-foreground tracking-tight max-w-2xl leading-[1.1]">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans text-foreground tracking-tight max-w-2xl leading-[1.1]">
               {t('title2')}
             </h2>
           </div>
-          <p className="text-lg text-foreground/60 font-sans max-w-sm leading-relaxed border-l-2 border-accent/30 pl-8 pb-2">
+          <p className="text-lg text-[#71717A] font-sans max-w-sm leading-relaxed border-l border-[#E4E4E7] pl-6 pb-2">
             {t('description')}
           </p>
         </div>

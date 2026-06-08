@@ -19,7 +19,7 @@ const getContactInfo = (t: any) => ({
 const HERO_SOCIAL_LINKS = [
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/daniel-reyes-01/',
+    href: 'https://www.linkedin.com/in/daniel-r-b1854610b/',
     icon: ExternalLink,
   },
   {
@@ -46,9 +46,9 @@ export const Hero: React.FC = () => {
   const wordB = t('wordB', { returnObjects: true }) as string[];
 
   return (
-    <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b border-background-secondary">
-      {/* Subtle Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-[0.4] pointer-events-none" />
+    <section className="relative w-full min-h-[90vh] flex items-center bg-background overflow-hidden border-b border-[#E4E4E7]">
+      {/* Wireframe Grid Pattern — AC-TEC-004 */}
+      <div className="absolute inset-0 grid-pattern opacity-[0.5] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-16 items-center relative z-10 w-full py-24 md:py-32">
         {/* Left Side: Minimalist Copy */}
@@ -59,20 +59,20 @@ export const Hero: React.FC = () => {
           className="flex flex-col items-start"
         >
           <div className="mb-8 flex items-center gap-3">
-            <span className="w-10 h-0.5 bg-primary" />
-            <span className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">
+            <span className="w-10 h-px bg-[#0070F3]" />
+            <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#71717A]">
               {t('seniorDev')}
             </span>
           </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground leading-[1.05] tracking-tight mb-10">
+
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-sans text-foreground leading-[1.05] tracking-tight mb-10">
             {t('titleP1')} <br />
-            <span className="text-secondary italic">
+            <span className="text-[#0070F3]">
               <TextRotator words={wordA} />
-            </span> 
+            </span>
             <br />
             {t('titleP3')}
-            <TextRotator words={wordB} className="underline decoration-2 underline-offset-[16px] decoration-accent" />
+            <TextRotator words={wordB} className="underline decoration-2 underline-offset-[16px] decoration-[#E4E4E7]" />
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/70 font-sans max-w-xl leading-relaxed mb-12">
@@ -86,8 +86,8 @@ export const Hero: React.FC = () => {
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </a>
-            <a href="#contact" className="group flex items-center gap-2 font-sans text-sm font-bold uppercase tracking-widest text-foreground hover:text-primary transition-all">
-              <span className="border-b-2 border-transparent group-hover:border-primary pb-1">
+            <a href="#contact" className="group flex items-center gap-2 font-sans text-sm font-bold uppercase tracking-widest text-foreground hover:text-[#0070F3] transition-all">
+              <span className="border-b border-transparent group-hover:border-[#0070F3] pb-1">
                 {t('contactMe')}
               </span>
               <ExternalLink className="w-4 h-4 opacity-40 group-hover:opacity-100" />
@@ -102,13 +102,13 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           className="relative hidden lg:block h-[620px] w-full"
         >
-          {/* Accent Circles */}
-          <div className="absolute -top-12 -right-12 w-48 h-48 bg-accent/20 rounded-full blur-3xl" />
-          <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
-          
-          {/* Image Container */}
+          {/* Geometric corner accents — sharp, no blobs */}
+          <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-[#E4E4E7]" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 border-b border-l border-[#E4E4E7]" />
+
+          {/* Image Container — CON-TEC-001: max rounded-lg */}
           <div
-            className="absolute inset-0 bg-background-secondary rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group cursor-pointer"
+            className="absolute inset-0 bg-[#F4F4F5] rounded-lg overflow-hidden border border-[#E4E4E7] group cursor-pointer"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
@@ -128,25 +128,25 @@ export const Hero: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.4 }}
-                  className="absolute inset-0 flex flex-col justify-end p-12 bg-gradient-to-t from-[#2B2A28]/90 via-[#2B2A28]/40 to-transparent backdrop-blur-[2px]"
+                  className="absolute inset-0 flex flex-col justify-end p-12 bg-gradient-to-t from-[#09090B]/90 via-[#09090B]/40 to-transparent backdrop-blur-[2px]"
                 >
-                  <p className="font-sans text-[11px] text-accent font-bold uppercase tracking-[0.3em] mb-6">
+                  <p className="font-mono text-[11px] text-[#0070F3] font-bold uppercase tracking-[0.3em] mb-6">
                     {t('contact')}
                   </p>
-                  
-                  <h3 className="text-4xl font-serif text-white mb-8 leading-tight">
+
+                  <h3 className="text-4xl font-sans text-white mb-8 leading-tight tracking-tight">
                     {t('seniorDev')}
                   </h3>
 
                   <ul className="space-y-6 mb-12 text-sm font-sans text-white/80">
                     <li className="flex flex-col gap-1">
-                      <span className="font-sans text-[10px] uppercase tracking-widest text-accent/60 font-bold">{t('mail')}</span>
-                      <a href={`mailto:${contactInfo.mail}`} className="text-lg text-white hover:text-accent transition-colors font-medium">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#0070F3]/80 font-bold">{t('mail')}</span>
+                      <a href={`mailto:${contactInfo.mail}`} className="text-lg text-white hover:text-[#0070F3] transition-colors font-medium">
                         {contactInfo.mail}
                       </a>
                     </li>
                     <li className="flex flex-col gap-1">
-                      <span className="font-sans text-[10px] uppercase tracking-widest text-accent/60 font-bold">{t('location')}</span>
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#0070F3]/80 font-bold">{t('location')}</span>
                       <span className="text-lg text-white font-medium">{contactInfo.location}</span>
                     </li>
                   </ul>
@@ -158,7 +158,7 @@ export const Hero: React.FC = () => {
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-4 bg-white/10 hover:bg-primary text-white transition-all duration-300 rounded-2xl border border-white/20 backdrop-blur-md"
+                        className="p-3 bg-white/10 hover:bg-[#0070F3] text-white transition-all duration-150 rounded-md border border-white/20 backdrop-blur-md"
                         aria-label={label}
                       >
                         <Icon className="w-5 h-5" />
