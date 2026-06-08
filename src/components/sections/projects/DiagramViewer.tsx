@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 import { X, ZoomIn } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -83,11 +84,8 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isOpen, close]);
 
-  // Prevent body scroll when open
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [isOpen]);
+  // Removed body scroll lock from here, as ProjectModal already handles it
+  // and toggling it here causes the page to unlock when DiagramViewer closes.
 
   return (
     <>
@@ -123,63 +121,49 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
       </button>
 
       {/* Fullscreen Lightbox */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-12 bg-[#2B2A28]/40 backdrop-blur-md"
-            onClick={close}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Architecture Diagram Viewer"
-          >
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && (
             <motion.div
-              initial={{ scale: 0.98, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.98, opacity: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="relative w-full max-w-6xl bg-white border border-accent/20 rounded-[2rem] overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
+              key="diagram-lightbox"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1A1A1A]/95 backdrop-blur-md"
+              onClick={close}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Architecture Diagram Viewer"
             >
-              {/* Modal header */}
-              <div className="flex items-center justify-between px-8 py-6 bg-white border-b border-accent/20">
-                <div className="flex items-center gap-4">
-                  <span className="font-sans text-[11px] font-bold text-secondary uppercase tracking-[0.2em]">Architecture</span>
-                  <h3 className="text-foreground font-serif text-xl tracking-tight">
-                    {t('architectureDiagram')}
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={close}
-                  aria-label="Close diagram viewer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full
-                             bg-background-secondary hover:bg-red-50 text-foreground hover:text-red-600
-                             border border-accent/20 hover:border-red-500
-                             transition-all duration-300"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+              {/* Floating Controls */}
+              <div className="absolute top-6 left-6 z-[110] flex items-center gap-3 bg-[#2B2A28]/80 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-2xl pointer-events-none">
+                <span className="font-sans text-[10px] font-bold text-white uppercase tracking-[0.2em]">{t('architectureDiagram')}</span>
               </div>
+              
+              <button
+                type="button"
+                onClick={close}
+                aria-label="Close diagram viewer"
+                className="absolute top-6 right-6 z-[110] flex items-center justify-center w-12 h-12 rounded-full
+                           bg-[#2B2A28]/80 hover:bg-white text-white hover:text-[#2B2A28] backdrop-blur-md
+                           border border-white/10 hover:border-white shadow-2xl
+                           transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50"
+              >
+                <X className="w-5 h-5" />
+              </button>
 
               {/* Diagram — dynamic zoom and pan */}
               <div 
                 ref={containerRef}
-                className="bg-background-secondary/50 relative flex items-center justify-center p-12 overflow-hidden"
-                style={{ height: 'calc(90vh - 88px)' }}
+                className="relative flex items-center justify-center w-full h-full overflow-hidden"
                 onWheel={handleWheel}
               >
-                {/* Viewport decoration */}
-                <div className="absolute inset-0 dot-pattern opacity-[0.2] pointer-events-none" />
-                
                 <motion.img
                   ref={imgRef}
                   src={diagramUrl}
                   alt={t('architectureDiagram')}
-                  className={`w-full h-auto object-contain block relative z-10 ${scale > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
+                  className={`w-full h-auto object-contain block p-4 sm:p-12 relative z-10 ${scale > 1 ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}`}
                   style={{ maxHeight: '100%', originX: 0.5, originY: 0.5 }}
                   animate={controls}
                   transition={{ type: 'spring', damping: 25, stiffness: 300 }}
@@ -188,12 +172,14 @@ export const DiagramViewer: React.FC<DiagramViewerProps> = ({ diagramUrl }) => {
                   dragElastic={0.05}
                   dragMomentum={false}
                   onLoad={updateConstraints}
+                  onClick={(e) => e.stopPropagation()}
                 />
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 };

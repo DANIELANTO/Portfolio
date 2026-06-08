@@ -1,4 +1,5 @@
 import React, { use, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { fetchProjects } from '../../hooks/useProjects';
@@ -24,14 +25,18 @@ const ProjectsList: React.FC = () => {
         ))}
       </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
+      {createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <ProjectModal
+              key="project-modal"
+              project={selectedProject}
+              onClose={() => setSelectedProject(null)}
+            />
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 };
